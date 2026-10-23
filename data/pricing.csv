@@ -1,0 +1,267 @@
+provider,region,instance_type,vcpu,ram_gb,gpu_type,gpu_count,storage_type_supported,pricing_model,price_per_hour,storage_price_per_gb_month,egress_price_per_gb,ingress_price_per_gb,interruption_risk,commitment_months,source,price_snapshot_date
+AWS,us-east-1,t3.medium,2,4,,0,SSD|HDD,on_demand,0.0416,0.08,0.09,0,low,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,us-east-1,t3.medium,2,4,,0,SSD|HDD,spot,0.01331,0.08,0.09,0,medium,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,us-east-1,t3.medium,2,4,,0,SSD|HDD,reserved,0.02746,0.08,0.09,0,low,12,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,eu-west-1,t3.medium,2,4,,0,SSD|HDD,on_demand,0.0449,0.08,0.09,0,low,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,eu-west-1,t3.medium,2,4,,0,SSD|HDD,spot,0.01437,0.08,0.09,0,medium,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,eu-west-1,t3.medium,2,4,,0,SSD|HDD,reserved,0.02963,0.08,0.09,0,low,12,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,us-east-1,t3.large,2,8,,0,SSD|HDD,on_demand,0.0832,0.08,0.09,0,low,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,us-east-1,t3.large,2,8,,0,SSD|HDD,spot,0.02662,0.08,0.09,0,medium,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,us-east-1,t3.large,2,8,,0,SSD|HDD,reserved,0.05491,0.08,0.09,0,low,12,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,eu-west-1,t3.large,2,8,,0,SSD|HDD,on_demand,0.0899,0.08,0.09,0,low,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,eu-west-1,t3.large,2,8,,0,SSD|HDD,spot,0.02877,0.08,0.09,0,medium,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,eu-west-1,t3.large,2,8,,0,SSD|HDD,reserved,0.05933,0.08,0.09,0,low,12,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,us-east-1,m5.large,2,8,,0,SSD|HDD,on_demand,0.096,0.08,0.09,0,low,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,us-east-1,m5.large,2,8,,0,SSD|HDD,spot,0.03072,0.08,0.09,0,medium,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,us-east-1,m5.large,2,8,,0,SSD|HDD,reserved,0.06336,0.08,0.09,0,low,12,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,eu-west-1,m5.large,2,8,,0,SSD|HDD,on_demand,0.1037,0.08,0.09,0,low,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,eu-west-1,m5.large,2,8,,0,SSD|HDD,spot,0.03318,0.08,0.09,0,medium,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,eu-west-1,m5.large,2,8,,0,SSD|HDD,reserved,0.06844,0.08,0.09,0,low,12,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,us-east-1,m5.xlarge,4,16,,0,SSD|HDD,on_demand,0.192,0.08,0.09,0,low,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,us-east-1,m5.xlarge,4,16,,0,SSD|HDD,spot,0.06144,0.08,0.09,0,medium,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,us-east-1,m5.xlarge,4,16,,0,SSD|HDD,reserved,0.12672,0.08,0.09,0,low,12,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,eu-west-1,m5.xlarge,4,16,,0,SSD|HDD,on_demand,0.2074,0.08,0.09,0,low,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,eu-west-1,m5.xlarge,4,16,,0,SSD|HDD,spot,0.06637,0.08,0.09,0,medium,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,eu-west-1,m5.xlarge,4,16,,0,SSD|HDD,reserved,0.13688,0.08,0.09,0,low,12,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,us-east-1,m5.2xlarge,8,32,,0,SSD|HDD,on_demand,0.384,0.08,0.09,0,low,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,us-east-1,m5.2xlarge,8,32,,0,SSD|HDD,spot,0.12288,0.08,0.09,0,medium,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,us-east-1,m5.2xlarge,8,32,,0,SSD|HDD,reserved,0.25344,0.08,0.09,0,low,12,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,eu-west-1,m5.2xlarge,8,32,,0,SSD|HDD,on_demand,0.4147,0.08,0.09,0,low,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,eu-west-1,m5.2xlarge,8,32,,0,SSD|HDD,spot,0.1327,0.08,0.09,0,medium,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,eu-west-1,m5.2xlarge,8,32,,0,SSD|HDD,reserved,0.2737,0.08,0.09,0,low,12,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,us-east-1,c5.large,2,4,,0,SSD|HDD,on_demand,0.085,0.08,0.09,0,low,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,us-east-1,c5.large,2,4,,0,SSD|HDD,spot,0.0272,0.08,0.09,0,medium,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,us-east-1,c5.large,2,4,,0,SSD|HDD,reserved,0.0561,0.08,0.09,0,low,12,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,eu-west-1,c5.large,2,4,,0,SSD|HDD,on_demand,0.0918,0.08,0.09,0,low,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,eu-west-1,c5.large,2,4,,0,SSD|HDD,spot,0.02938,0.08,0.09,0,medium,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,eu-west-1,c5.large,2,4,,0,SSD|HDD,reserved,0.06059,0.08,0.09,0,low,12,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,us-east-1,c5.xlarge,4,8,,0,SSD|HDD,on_demand,0.17,0.08,0.09,0,low,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,us-east-1,c5.xlarge,4,8,,0,SSD|HDD,spot,0.0544,0.08,0.09,0,medium,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,us-east-1,c5.xlarge,4,8,,0,SSD|HDD,reserved,0.1122,0.08,0.09,0,low,12,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,eu-west-1,c5.xlarge,4,8,,0,SSD|HDD,on_demand,0.1836,0.08,0.09,0,low,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,eu-west-1,c5.xlarge,4,8,,0,SSD|HDD,spot,0.05875,0.08,0.09,0,medium,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,eu-west-1,c5.xlarge,4,8,,0,SSD|HDD,reserved,0.12118,0.08,0.09,0,low,12,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,us-east-1,c5.2xlarge,8,16,,0,SSD|HDD,on_demand,0.34,0.08,0.09,0,low,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,us-east-1,c5.2xlarge,8,16,,0,SSD|HDD,spot,0.1088,0.08,0.09,0,medium,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,us-east-1,c5.2xlarge,8,16,,0,SSD|HDD,reserved,0.2244,0.08,0.09,0,low,12,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,eu-west-1,c5.2xlarge,8,16,,0,SSD|HDD,on_demand,0.3672,0.08,0.09,0,low,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,eu-west-1,c5.2xlarge,8,16,,0,SSD|HDD,spot,0.1175,0.08,0.09,0,medium,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,eu-west-1,c5.2xlarge,8,16,,0,SSD|HDD,reserved,0.24235,0.08,0.09,0,low,12,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,us-east-1,r5.large,2,16,,0,SSD|HDD,on_demand,0.126,0.08,0.09,0,low,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,us-east-1,r5.large,2,16,,0,SSD|HDD,spot,0.04032,0.08,0.09,0,medium,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,us-east-1,r5.large,2,16,,0,SSD|HDD,reserved,0.08316,0.08,0.09,0,low,12,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,eu-west-1,r5.large,2,16,,0,SSD|HDD,on_demand,0.1361,0.08,0.09,0,low,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,eu-west-1,r5.large,2,16,,0,SSD|HDD,spot,0.04355,0.08,0.09,0,medium,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,eu-west-1,r5.large,2,16,,0,SSD|HDD,reserved,0.08983,0.08,0.09,0,low,12,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,us-east-1,r5.xlarge,4,32,,0,SSD|HDD,on_demand,0.252,0.08,0.09,0,low,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,us-east-1,r5.xlarge,4,32,,0,SSD|HDD,spot,0.08064,0.08,0.09,0,medium,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,us-east-1,r5.xlarge,4,32,,0,SSD|HDD,reserved,0.16632,0.08,0.09,0,low,12,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,eu-west-1,r5.xlarge,4,32,,0,SSD|HDD,on_demand,0.2722,0.08,0.09,0,low,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,eu-west-1,r5.xlarge,4,32,,0,SSD|HDD,spot,0.0871,0.08,0.09,0,medium,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,eu-west-1,r5.xlarge,4,32,,0,SSD|HDD,reserved,0.17965,0.08,0.09,0,low,12,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,us-east-1,r5.2xlarge,8,64,,0,SSD|HDD,on_demand,0.504,0.08,0.09,0,low,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,us-east-1,r5.2xlarge,8,64,,0,SSD|HDD,spot,0.16128,0.08,0.09,0,medium,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,us-east-1,r5.2xlarge,8,64,,0,SSD|HDD,reserved,0.33264,0.08,0.09,0,low,12,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,eu-west-1,r5.2xlarge,8,64,,0,SSD|HDD,on_demand,0.5443,0.08,0.09,0,low,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,eu-west-1,r5.2xlarge,8,64,,0,SSD|HDD,spot,0.17418,0.08,0.09,0,medium,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,eu-west-1,r5.2xlarge,8,64,,0,SSD|HDD,reserved,0.35924,0.08,0.09,0,low,12,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,us-east-1,g4dn.xlarge,4,16,NVIDIA T4,1,SSD|HDD,on_demand,0.526,0.08,0.09,0,low,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,us-east-1,g4dn.xlarge,4,16,NVIDIA T4,1,SSD|HDD,spot,0.16832,0.08,0.09,0,high,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,us-east-1,g4dn.xlarge,4,16,NVIDIA T4,1,SSD|HDD,reserved,0.34716,0.08,0.09,0,low,12,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,eu-west-1,g4dn.xlarge,4,16,NVIDIA T4,1,SSD|HDD,on_demand,0.5681,0.08,0.09,0,low,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,eu-west-1,g4dn.xlarge,4,16,NVIDIA T4,1,SSD|HDD,spot,0.18179,0.08,0.09,0,high,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,eu-west-1,g4dn.xlarge,4,16,NVIDIA T4,1,SSD|HDD,reserved,0.37495,0.08,0.09,0,low,12,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,us-east-1,g4dn.2xlarge,8,32,NVIDIA T4,1,SSD|HDD,on_demand,0.752,0.08,0.09,0,low,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,us-east-1,g4dn.2xlarge,8,32,NVIDIA T4,1,SSD|HDD,spot,0.24064,0.08,0.09,0,high,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,us-east-1,g4dn.2xlarge,8,32,NVIDIA T4,1,SSD|HDD,reserved,0.49632,0.08,0.09,0,low,12,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,eu-west-1,g4dn.2xlarge,8,32,NVIDIA T4,1,SSD|HDD,on_demand,0.8122,0.08,0.09,0,low,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,eu-west-1,g4dn.2xlarge,8,32,NVIDIA T4,1,SSD|HDD,spot,0.2599,0.08,0.09,0,high,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,eu-west-1,g4dn.2xlarge,8,32,NVIDIA T4,1,SSD|HDD,reserved,0.53605,0.08,0.09,0,low,12,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,us-east-1,g5.xlarge,4,16,NVIDIA A10,1,SSD|HDD,on_demand,1.006,0.08,0.09,0,low,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,us-east-1,g5.xlarge,4,16,NVIDIA A10,1,SSD|HDD,spot,0.32192,0.08,0.09,0,high,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,us-east-1,g5.xlarge,4,16,NVIDIA A10,1,SSD|HDD,reserved,0.66396,0.08,0.09,0,low,12,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,eu-west-1,g5.xlarge,4,16,NVIDIA A10,1,SSD|HDD,on_demand,1.0865,0.08,0.09,0,low,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,eu-west-1,g5.xlarge,4,16,NVIDIA A10,1,SSD|HDD,spot,0.34768,0.08,0.09,0,high,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,eu-west-1,g5.xlarge,4,16,NVIDIA A10,1,SSD|HDD,reserved,0.71709,0.08,0.09,0,low,12,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,us-east-1,g6.xlarge,4,16,NVIDIA L4,1,SSD|HDD,on_demand,0.8048,0.08,0.09,0,low,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,us-east-1,g6.xlarge,4,16,NVIDIA L4,1,SSD|HDD,spot,0.25754,0.08,0.09,0,high,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,us-east-1,g6.xlarge,4,16,NVIDIA L4,1,SSD|HDD,reserved,0.53117,0.08,0.09,0,low,12,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,eu-west-1,g6.xlarge,4,16,NVIDIA L4,1,SSD|HDD,on_demand,0.8692,0.08,0.09,0,low,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,eu-west-1,g6.xlarge,4,16,NVIDIA L4,1,SSD|HDD,spot,0.27814,0.08,0.09,0,high,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,eu-west-1,g6.xlarge,4,16,NVIDIA L4,1,SSD|HDD,reserved,0.57367,0.08,0.09,0,low,12,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,us-east-1,p4d.24xlarge,96,1152,NVIDIA A100,8,SSD|HDD,on_demand,21.96,0.08,0.09,0,low,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,us-east-1,p4d.24xlarge,96,1152,NVIDIA A100,8,SSD|HDD,spot,7.0272,0.08,0.09,0,high,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,us-east-1,p4d.24xlarge,96,1152,NVIDIA A100,8,SSD|HDD,reserved,14.4936,0.08,0.09,0,low,12,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,eu-west-1,p4d.24xlarge,96,1152,NVIDIA A100,8,SSD|HDD,on_demand,23.7168,0.08,0.09,0,low,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,eu-west-1,p4d.24xlarge,96,1152,NVIDIA A100,8,SSD|HDD,spot,7.58938,0.08,0.09,0,high,0,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+AWS,eu-west-1,p4d.24xlarge,96,1152,NVIDIA A100,8,SSD|HDD,reserved,15.65309,0.08,0.09,0,low,12,AWS EC2 pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,eastus,B2s,2,4,,0,SSD|HDD,on_demand,0.0416,0.075,0.087,0,low,0,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,eastus,B2s,2,4,,0,SSD|HDD,reserved,0.02579,0.075,0.087,0,low,12,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,westeurope,B2s,2,4,,0,SSD|HDD,on_demand,0.0458,0.075,0.087,0,low,0,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,westeurope,B2s,2,4,,0,SSD|HDD,reserved,0.0284,0.075,0.087,0,low,12,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,eastus,B2ms,2,8,,0,SSD|HDD,on_demand,0.0832,0.075,0.087,0,low,0,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,eastus,B2ms,2,8,,0,SSD|HDD,reserved,0.05158,0.075,0.087,0,low,12,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,westeurope,B2ms,2,8,,0,SSD|HDD,on_demand,0.0915,0.075,0.087,0,low,0,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,westeurope,B2ms,2,8,,0,SSD|HDD,reserved,0.05673,0.075,0.087,0,low,12,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,eastus,D2s_v3,2,8,,0,SSD|HDD,on_demand,0.096,0.075,0.087,0,low,0,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,eastus,D2s_v3,2,8,,0,SSD|HDD,spot,0.03648,0.075,0.087,0,medium,0,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,eastus,D2s_v3,2,8,,0,SSD|HDD,reserved,0.05952,0.075,0.087,0,low,12,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,westeurope,D2s_v3,2,8,,0,SSD|HDD,on_demand,0.1056,0.075,0.087,0,low,0,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,westeurope,D2s_v3,2,8,,0,SSD|HDD,spot,0.04013,0.075,0.087,0,medium,0,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,westeurope,D2s_v3,2,8,,0,SSD|HDD,reserved,0.06547,0.075,0.087,0,low,12,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,eastus,D4s_v3,4,16,,0,SSD|HDD,on_demand,0.192,0.075,0.087,0,low,0,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,eastus,D4s_v3,4,16,,0,SSD|HDD,spot,0.07296,0.075,0.087,0,medium,0,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,eastus,D4s_v3,4,16,,0,SSD|HDD,reserved,0.11904,0.075,0.087,0,low,12,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,westeurope,D4s_v3,4,16,,0,SSD|HDD,on_demand,0.2112,0.075,0.087,0,low,0,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,westeurope,D4s_v3,4,16,,0,SSD|HDD,spot,0.08026,0.075,0.087,0,medium,0,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,westeurope,D4s_v3,4,16,,0,SSD|HDD,reserved,0.13094,0.075,0.087,0,low,12,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,eastus,D8s_v3,8,32,,0,SSD|HDD,on_demand,0.384,0.075,0.087,0,low,0,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,eastus,D8s_v3,8,32,,0,SSD|HDD,spot,0.14592,0.075,0.087,0,medium,0,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,eastus,D8s_v3,8,32,,0,SSD|HDD,reserved,0.23808,0.075,0.087,0,low,12,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,westeurope,D8s_v3,8,32,,0,SSD|HDD,on_demand,0.4224,0.075,0.087,0,low,0,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,westeurope,D8s_v3,8,32,,0,SSD|HDD,spot,0.16051,0.075,0.087,0,medium,0,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,westeurope,D8s_v3,8,32,,0,SSD|HDD,reserved,0.26189,0.075,0.087,0,low,12,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,eastus,F2s_v2,2,4,,0,SSD|HDD,on_demand,0.085,0.075,0.087,0,low,0,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,eastus,F2s_v2,2,4,,0,SSD|HDD,spot,0.0323,0.075,0.087,0,medium,0,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,eastus,F2s_v2,2,4,,0,SSD|HDD,reserved,0.0527,0.075,0.087,0,low,12,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,westeurope,F2s_v2,2,4,,0,SSD|HDD,on_demand,0.0935,0.075,0.087,0,low,0,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,westeurope,F2s_v2,2,4,,0,SSD|HDD,spot,0.03553,0.075,0.087,0,medium,0,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,westeurope,F2s_v2,2,4,,0,SSD|HDD,reserved,0.05797,0.075,0.087,0,low,12,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,eastus,F4s_v2,4,8,,0,SSD|HDD,on_demand,0.169,0.075,0.087,0,low,0,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,eastus,F4s_v2,4,8,,0,SSD|HDD,spot,0.06422,0.075,0.087,0,medium,0,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,eastus,F4s_v2,4,8,,0,SSD|HDD,reserved,0.10478,0.075,0.087,0,low,12,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,westeurope,F4s_v2,4,8,,0,SSD|HDD,on_demand,0.1859,0.075,0.087,0,low,0,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,westeurope,F4s_v2,4,8,,0,SSD|HDD,spot,0.07064,0.075,0.087,0,medium,0,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,westeurope,F4s_v2,4,8,,0,SSD|HDD,reserved,0.11526,0.075,0.087,0,low,12,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,eastus,F8s_v2,8,16,,0,SSD|HDD,on_demand,0.338,0.075,0.087,0,low,0,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,eastus,F8s_v2,8,16,,0,SSD|HDD,spot,0.12844,0.075,0.087,0,medium,0,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,eastus,F8s_v2,8,16,,0,SSD|HDD,reserved,0.20956,0.075,0.087,0,low,12,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,westeurope,F8s_v2,8,16,,0,SSD|HDD,on_demand,0.3718,0.075,0.087,0,low,0,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,westeurope,F8s_v2,8,16,,0,SSD|HDD,spot,0.14128,0.075,0.087,0,medium,0,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,westeurope,F8s_v2,8,16,,0,SSD|HDD,reserved,0.23052,0.075,0.087,0,low,12,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,eastus,E2s_v3,2,16,,0,SSD|HDD,on_demand,0.126,0.075,0.087,0,low,0,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,eastus,E2s_v3,2,16,,0,SSD|HDD,spot,0.04788,0.075,0.087,0,medium,0,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,eastus,E2s_v3,2,16,,0,SSD|HDD,reserved,0.07812,0.075,0.087,0,low,12,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,westeurope,E2s_v3,2,16,,0,SSD|HDD,on_demand,0.1386,0.075,0.087,0,low,0,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,westeurope,E2s_v3,2,16,,0,SSD|HDD,spot,0.05267,0.075,0.087,0,medium,0,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,westeurope,E2s_v3,2,16,,0,SSD|HDD,reserved,0.08593,0.075,0.087,0,low,12,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,eastus,E4s_v3,4,32,,0,SSD|HDD,on_demand,0.252,0.075,0.087,0,low,0,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,eastus,E4s_v3,4,32,,0,SSD|HDD,spot,0.09576,0.075,0.087,0,medium,0,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,eastus,E4s_v3,4,32,,0,SSD|HDD,reserved,0.15624,0.075,0.087,0,low,12,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,westeurope,E4s_v3,4,32,,0,SSD|HDD,on_demand,0.2772,0.075,0.087,0,low,0,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,westeurope,E4s_v3,4,32,,0,SSD|HDD,spot,0.10534,0.075,0.087,0,medium,0,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,westeurope,E4s_v3,4,32,,0,SSD|HDD,reserved,0.17186,0.075,0.087,0,low,12,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,eastus,E8s_v3,8,64,,0,SSD|HDD,on_demand,0.504,0.075,0.087,0,low,0,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,eastus,E8s_v3,8,64,,0,SSD|HDD,spot,0.19152,0.075,0.087,0,medium,0,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,eastus,E8s_v3,8,64,,0,SSD|HDD,reserved,0.31248,0.075,0.087,0,low,12,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,westeurope,E8s_v3,8,64,,0,SSD|HDD,on_demand,0.5544,0.075,0.087,0,low,0,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,westeurope,E8s_v3,8,64,,0,SSD|HDD,spot,0.21067,0.075,0.087,0,medium,0,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,westeurope,E8s_v3,8,64,,0,SSD|HDD,reserved,0.34373,0.075,0.087,0,low,12,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,eastus,NC4as_T4_v3,4,28,NVIDIA T4,1,SSD|HDD,on_demand,0.526,0.075,0.087,0,low,0,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,eastus,NC4as_T4_v3,4,28,NVIDIA T4,1,SSD|HDD,spot,0.19988,0.075,0.087,0,high,0,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,eastus,NC4as_T4_v3,4,28,NVIDIA T4,1,SSD|HDD,reserved,0.32612,0.075,0.087,0,low,12,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,westeurope,NC4as_T4_v3,4,28,NVIDIA T4,1,SSD|HDD,on_demand,0.5786,0.075,0.087,0,low,0,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,westeurope,NC4as_T4_v3,4,28,NVIDIA T4,1,SSD|HDD,spot,0.21987,0.075,0.087,0,high,0,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,westeurope,NC4as_T4_v3,4,28,NVIDIA T4,1,SSD|HDD,reserved,0.35873,0.075,0.087,0,low,12,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,eastus,NC8as_T4_v3,8,56,NVIDIA T4,1,SSD|HDD,on_demand,0.752,0.075,0.087,0,low,0,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,eastus,NC8as_T4_v3,8,56,NVIDIA T4,1,SSD|HDD,spot,0.28576,0.075,0.087,0,high,0,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,eastus,NC8as_T4_v3,8,56,NVIDIA T4,1,SSD|HDD,reserved,0.46624,0.075,0.087,0,low,12,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,westeurope,NC8as_T4_v3,8,56,NVIDIA T4,1,SSD|HDD,on_demand,0.8272,0.075,0.087,0,low,0,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,westeurope,NC8as_T4_v3,8,56,NVIDIA T4,1,SSD|HDD,spot,0.31434,0.075,0.087,0,high,0,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,westeurope,NC8as_T4_v3,8,56,NVIDIA T4,1,SSD|HDD,reserved,0.51286,0.075,0.087,0,low,12,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,eastus,NC24ads_A100_v4,24,220,NVIDIA A100,1,SSD|HDD,on_demand,3.673,0.075,0.087,0,low,0,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,eastus,NC24ads_A100_v4,24,220,NVIDIA A100,1,SSD|HDD,spot,1.39574,0.075,0.087,0,high,0,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,eastus,NC24ads_A100_v4,24,220,NVIDIA A100,1,SSD|HDD,reserved,2.27726,0.075,0.087,0,low,12,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,westeurope,NC24ads_A100_v4,24,220,NVIDIA A100,1,SSD|HDD,on_demand,4.0403,0.075,0.087,0,low,0,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,westeurope,NC24ads_A100_v4,24,220,NVIDIA A100,1,SSD|HDD,spot,1.53531,0.075,0.087,0,high,0,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+Azure,westeurope,NC24ads_A100_v4,24,220,NVIDIA A100,1,SSD|HDD,reserved,2.50499,0.075,0.087,0,low,12,Azure Linux VM pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,us-central1,e2-medium,2,4,,0,SSD|HDD,on_demand,0.0335,0.1,0.12,0,low,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,us-central1,e2-medium,2,4,,0,SSD|HDD,spot,0.00737,0.1,0.12,0,medium,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,us-central1,e2-medium,2,4,,0,SSD|HDD,reserved,0.02111,0.1,0.12,0,low,12,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,europe-west1,e2-medium,2,4,,0,SSD|HDD,on_demand,0.0362,0.1,0.12,0,low,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,europe-west1,e2-medium,2,4,,0,SSD|HDD,spot,0.00796,0.1,0.12,0,medium,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,europe-west1,e2-medium,2,4,,0,SSD|HDD,reserved,0.02281,0.1,0.12,0,low,12,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,us-central1,e2-standard-2,2,8,,0,SSD|HDD,on_demand,0.067,0.1,0.12,0,low,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,us-central1,e2-standard-2,2,8,,0,SSD|HDD,spot,0.01474,0.1,0.12,0,medium,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,us-central1,e2-standard-2,2,8,,0,SSD|HDD,reserved,0.04221,0.1,0.12,0,low,12,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,europe-west1,e2-standard-2,2,8,,0,SSD|HDD,on_demand,0.0724,0.1,0.12,0,low,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,europe-west1,e2-standard-2,2,8,,0,SSD|HDD,spot,0.01593,0.1,0.12,0,medium,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,europe-west1,e2-standard-2,2,8,,0,SSD|HDD,reserved,0.04561,0.1,0.12,0,low,12,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,us-central1,e2-standard-4,4,16,,0,SSD|HDD,on_demand,0.134,0.1,0.12,0,low,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,us-central1,e2-standard-4,4,16,,0,SSD|HDD,spot,0.02948,0.1,0.12,0,medium,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,us-central1,e2-standard-4,4,16,,0,SSD|HDD,reserved,0.08442,0.1,0.12,0,low,12,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,europe-west1,e2-standard-4,4,16,,0,SSD|HDD,on_demand,0.1447,0.1,0.12,0,low,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,europe-west1,e2-standard-4,4,16,,0,SSD|HDD,spot,0.03183,0.1,0.12,0,medium,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,europe-west1,e2-standard-4,4,16,,0,SSD|HDD,reserved,0.09116,0.1,0.12,0,low,12,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,us-central1,n2-standard-2,2,8,,0,SSD|HDD,on_demand,0.0971,0.1,0.12,0,low,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,us-central1,n2-standard-2,2,8,,0,SSD|HDD,spot,0.02136,0.1,0.12,0,medium,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,us-central1,n2-standard-2,2,8,,0,SSD|HDD,reserved,0.06117,0.1,0.12,0,low,12,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,europe-west1,n2-standard-2,2,8,,0,SSD|HDD,on_demand,0.1049,0.1,0.12,0,low,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,europe-west1,n2-standard-2,2,8,,0,SSD|HDD,spot,0.02308,0.1,0.12,0,medium,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,europe-west1,n2-standard-2,2,8,,0,SSD|HDD,reserved,0.06609,0.1,0.12,0,low,12,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,us-central1,n2-standard-4,4,16,,0,SSD|HDD,on_demand,0.1942,0.1,0.12,0,low,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,us-central1,n2-standard-4,4,16,,0,SSD|HDD,spot,0.04272,0.1,0.12,0,medium,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,us-central1,n2-standard-4,4,16,,0,SSD|HDD,reserved,0.12235,0.1,0.12,0,low,12,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,europe-west1,n2-standard-4,4,16,,0,SSD|HDD,on_demand,0.2097,0.1,0.12,0,low,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,europe-west1,n2-standard-4,4,16,,0,SSD|HDD,spot,0.04613,0.1,0.12,0,medium,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,europe-west1,n2-standard-4,4,16,,0,SSD|HDD,reserved,0.13211,0.1,0.12,0,low,12,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,us-central1,n2-standard-8,8,32,,0,SSD|HDD,on_demand,0.3885,0.1,0.12,0,low,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,us-central1,n2-standard-8,8,32,,0,SSD|HDD,spot,0.08547,0.1,0.12,0,medium,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,us-central1,n2-standard-8,8,32,,0,SSD|HDD,reserved,0.24476,0.1,0.12,0,low,12,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,europe-west1,n2-standard-8,8,32,,0,SSD|HDD,on_demand,0.4196,0.1,0.12,0,low,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,europe-west1,n2-standard-8,8,32,,0,SSD|HDD,spot,0.09231,0.1,0.12,0,medium,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,europe-west1,n2-standard-8,8,32,,0,SSD|HDD,reserved,0.26435,0.1,0.12,0,low,12,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,us-central1,c2-standard-4,4,16,,0,SSD|HDD,on_demand,0.2088,0.1,0.12,0,low,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,us-central1,c2-standard-4,4,16,,0,SSD|HDD,spot,0.04594,0.1,0.12,0,medium,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,us-central1,c2-standard-4,4,16,,0,SSD|HDD,reserved,0.13154,0.1,0.12,0,low,12,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,europe-west1,c2-standard-4,4,16,,0,SSD|HDD,on_demand,0.2255,0.1,0.12,0,low,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,europe-west1,c2-standard-4,4,16,,0,SSD|HDD,spot,0.04961,0.1,0.12,0,medium,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,europe-west1,c2-standard-4,4,16,,0,SSD|HDD,reserved,0.14206,0.1,0.12,0,low,12,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,us-central1,c2-standard-8,8,32,,0,SSD|HDD,on_demand,0.4176,0.1,0.12,0,low,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,us-central1,c2-standard-8,8,32,,0,SSD|HDD,spot,0.09187,0.1,0.12,0,medium,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,us-central1,c2-standard-8,8,32,,0,SSD|HDD,reserved,0.26309,0.1,0.12,0,low,12,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,europe-west1,c2-standard-8,8,32,,0,SSD|HDD,on_demand,0.451,0.1,0.12,0,low,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,europe-west1,c2-standard-8,8,32,,0,SSD|HDD,spot,0.09922,0.1,0.12,0,medium,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,europe-west1,c2-standard-8,8,32,,0,SSD|HDD,reserved,0.28413,0.1,0.12,0,low,12,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,us-central1,n2-highmem-2,2,16,,0,SSD|HDD,on_demand,0.131,0.1,0.12,0,low,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,us-central1,n2-highmem-2,2,16,,0,SSD|HDD,spot,0.02882,0.1,0.12,0,medium,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,us-central1,n2-highmem-2,2,16,,0,SSD|HDD,reserved,0.08253,0.1,0.12,0,low,12,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,europe-west1,n2-highmem-2,2,16,,0,SSD|HDD,on_demand,0.1415,0.1,0.12,0,low,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,europe-west1,n2-highmem-2,2,16,,0,SSD|HDD,spot,0.03113,0.1,0.12,0,medium,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,europe-west1,n2-highmem-2,2,16,,0,SSD|HDD,reserved,0.08914,0.1,0.12,0,low,12,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,us-central1,n2-highmem-4,4,32,,0,SSD|HDD,on_demand,0.262,0.1,0.12,0,low,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,us-central1,n2-highmem-4,4,32,,0,SSD|HDD,spot,0.05764,0.1,0.12,0,medium,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,us-central1,n2-highmem-4,4,32,,0,SSD|HDD,reserved,0.16506,0.1,0.12,0,low,12,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,europe-west1,n2-highmem-4,4,32,,0,SSD|HDD,on_demand,0.283,0.1,0.12,0,low,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,europe-west1,n2-highmem-4,4,32,,0,SSD|HDD,spot,0.06226,0.1,0.12,0,medium,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,europe-west1,n2-highmem-4,4,32,,0,SSD|HDD,reserved,0.17829,0.1,0.12,0,low,12,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,us-central1,n2-highmem-8,8,64,,0,SSD|HDD,on_demand,0.524,0.1,0.12,0,low,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,us-central1,n2-highmem-8,8,64,,0,SSD|HDD,spot,0.11528,0.1,0.12,0,medium,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,us-central1,n2-highmem-8,8,64,,0,SSD|HDD,reserved,0.33012,0.1,0.12,0,low,12,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,europe-west1,n2-highmem-8,8,64,,0,SSD|HDD,on_demand,0.5659,0.1,0.12,0,low,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,europe-west1,n2-highmem-8,8,64,,0,SSD|HDD,spot,0.1245,0.1,0.12,0,medium,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,europe-west1,n2-highmem-8,8,64,,0,SSD|HDD,reserved,0.35652,0.1,0.12,0,low,12,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,us-central1,n1-standard-4+T4,4,15,NVIDIA T4,1,SSD|HDD,on_demand,0.54,0.1,0.12,0,low,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,us-central1,n1-standard-4+T4,4,15,NVIDIA T4,1,SSD|HDD,spot,0.1188,0.1,0.12,0,high,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,us-central1,n1-standard-4+T4,4,15,NVIDIA T4,1,SSD|HDD,reserved,0.3402,0.1,0.12,0,low,12,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,europe-west1,n1-standard-4+T4,4,15,NVIDIA T4,1,SSD|HDD,on_demand,0.5832,0.1,0.12,0,low,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,europe-west1,n1-standard-4+T4,4,15,NVIDIA T4,1,SSD|HDD,spot,0.1283,0.1,0.12,0,high,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,europe-west1,n1-standard-4+T4,4,15,NVIDIA T4,1,SSD|HDD,reserved,0.36742,0.1,0.12,0,low,12,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,us-central1,n1-highmem-8+T4,8,52,NVIDIA T4,1,SSD|HDD,on_demand,0.8,0.1,0.12,0,low,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,us-central1,n1-highmem-8+T4,8,52,NVIDIA T4,1,SSD|HDD,spot,0.176,0.1,0.12,0,high,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,us-central1,n1-highmem-8+T4,8,52,NVIDIA T4,1,SSD|HDD,reserved,0.504,0.1,0.12,0,low,12,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,europe-west1,n1-highmem-8+T4,8,52,NVIDIA T4,1,SSD|HDD,on_demand,0.864,0.1,0.12,0,low,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,europe-west1,n1-highmem-8+T4,8,52,NVIDIA T4,1,SSD|HDD,spot,0.19008,0.1,0.12,0,high,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,europe-west1,n1-highmem-8+T4,8,52,NVIDIA T4,1,SSD|HDD,reserved,0.54432,0.1,0.12,0,low,12,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,us-central1,g2-standard-4,4,16,NVIDIA L4,1,SSD|HDD,on_demand,0.71,0.1,0.12,0,low,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,us-central1,g2-standard-4,4,16,NVIDIA L4,1,SSD|HDD,spot,0.1562,0.1,0.12,0,high,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,us-central1,g2-standard-4,4,16,NVIDIA L4,1,SSD|HDD,reserved,0.4473,0.1,0.12,0,low,12,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,europe-west1,g2-standard-4,4,16,NVIDIA L4,1,SSD|HDD,on_demand,0.7668,0.1,0.12,0,low,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,europe-west1,g2-standard-4,4,16,NVIDIA L4,1,SSD|HDD,spot,0.1687,0.1,0.12,0,high,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,europe-west1,g2-standard-4,4,16,NVIDIA L4,1,SSD|HDD,reserved,0.48308,0.1,0.12,0,low,12,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,us-central1,a2-highgpu-1g,12,85,NVIDIA A100,1,SSD|HDD,on_demand,3.67,0.1,0.12,0,low,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,us-central1,a2-highgpu-1g,12,85,NVIDIA A100,1,SSD|HDD,spot,0.8074,0.1,0.12,0,high,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,us-central1,a2-highgpu-1g,12,85,NVIDIA A100,1,SSD|HDD,reserved,2.3121,0.1,0.12,0,low,12,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,europe-west1,a2-highgpu-1g,12,85,NVIDIA A100,1,SSD|HDD,on_demand,3.9636,0.1,0.12,0,low,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,europe-west1,a2-highgpu-1g,12,85,NVIDIA A100,1,SSD|HDD,spot,0.87199,0.1,0.12,0,high,0,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19
+GCP,europe-west1,a2-highgpu-1g,12,85,NVIDIA A100,1,SSD|HDD,reserved,2.49707,0.1,0.12,0,low,12,Google Compute Engine pricing page (illustrative value - replace with captured price),2026-10-19

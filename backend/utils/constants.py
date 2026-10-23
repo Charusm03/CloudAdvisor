@@ -1,0 +1,9 @@
+PROVIDERS = ("AWS", "Azure", "GCP")
+PRICING_MODELS = ("on_demand", "spot", "reserved")
+STORAGE_TYPES = ("SSD", "HDD")
+USAGE_PATTERNS = ("steady-state", "bursty", "batch/scheduled", "gpu-intensive")
+INTERRUPTION_RISKS = ("low", "medium", "high")
+MAX_RUNTIME_HOURS = 744
+DEFAULT_RUNTIME_HOURS = 720
+MODEL_LABELS = {"on_demand": "On-Demand", "spot": "Spot/Preemptible", "reserved": "Reserved/Committed"}
+BASELINE_KEYS = ("aws_on_demand", "azure_on_demand", "gcp_on_demand", "cheapest_on_demand")
