@@ -1,0 +1,37 @@
+provider,region,instance_type,vcpu,ram_gb,gpu_type,gpu_count,storage_type_supported,pricing_model,price_per_hour,storage_price_per_gb_month,egress_price_per_gb,ingress_price_per_gb,interruption_risk,commitment_months,source,price_snapshot_date
+AWS,us-east-1,m5.large,2,8,,0,SSD|HDD,on_demand,0.096,0.080,0.090,0,low,0,Project report Table 6.2 (illustrative reference snapshot),2026-10-19
+AWS,us-east-1,m5.large,2,8,,0,SSD|HDD,spot,0.03072,0.080,0.090,0,medium,0,Project report Table 6.2 (illustrative reference snapshot),2026-10-19
+AWS,us-east-1,m5.large,2,8,,0,SSD|HDD,reserved,0.06336,0.080,0.090,0,low,12,Project report Table 6.2 (illustrative reference snapshot),2026-10-19
+AWS,us-east-1,m5.xlarge,4,16,,0,SSD|HDD,on_demand,0.192,0.080,0.090,0,low,0,Project report Table 6.2 (illustrative reference snapshot),2026-10-19
+AWS,us-east-1,m5.xlarge,4,16,,0,SSD|HDD,spot,0.06144,0.080,0.090,0,medium,0,Project report Table 6.2 (illustrative reference snapshot),2026-10-19
+AWS,us-east-1,m5.xlarge,4,16,,0,SSD|HDD,reserved,0.12672,0.080,0.090,0,low,12,Project report Table 6.2 (illustrative reference snapshot),2026-10-19
+AWS,us-east-1,m5.2xlarge,8,32,,0,SSD|HDD,on_demand,0.384,0.080,0.090,0,low,0,Project report Table 6.2 (illustrative reference snapshot),2026-10-19
+AWS,us-east-1,m5.2xlarge,8,32,,0,SSD|HDD,spot,0.12288,0.080,0.090,0,medium,0,Project report Table 6.2 (illustrative reference snapshot),2026-10-19
+AWS,us-east-1,m5.2xlarge,8,32,,0,SSD|HDD,reserved,0.25344,0.080,0.090,0,low,12,Project report Table 6.2 (illustrative reference snapshot),2026-10-19
+AWS,us-east-1,g4dn.xlarge,4,16,NVIDIA T4,1,SSD|HDD,on_demand,0.526,0.080,0.090,0,low,0,Project report Table 6.2 (illustrative reference snapshot),2026-10-19
+AWS,us-east-1,g4dn.xlarge,4,16,NVIDIA T4,1,SSD|HDD,spot,0.16832,0.080,0.090,0,medium,0,Project report Table 6.2 (illustrative reference snapshot),2026-10-19
+AWS,us-east-1,g4dn.xlarge,4,16,NVIDIA T4,1,SSD|HDD,reserved,0.34716,0.080,0.090,0,low,12,Project report Table 6.2 (illustrative reference snapshot),2026-10-19
+Azure,eastus,D2s_v3,2,8,,0,SSD|HDD,on_demand,0.096,0.075,0.087,0,low,0,Project report Table 6.2 (illustrative reference snapshot),2026-10-19
+Azure,eastus,D2s_v3,2,8,,0,SSD|HDD,spot,0.03648,0.075,0.087,0,medium,0,Project report Table 6.2 (illustrative reference snapshot),2026-10-19
+Azure,eastus,D2s_v3,2,8,,0,SSD|HDD,reserved,0.05952,0.075,0.087,0,low,12,Project report Table 6.2 (illustrative reference snapshot),2026-10-19
+Azure,eastus,D4s_v3,4,16,,0,SSD|HDD,on_demand,0.192,0.075,0.087,0,low,0,Project report Table 6.2 (illustrative reference snapshot),2026-10-19
+Azure,eastus,D4s_v3,4,16,,0,SSD|HDD,spot,0.07296,0.075,0.087,0,medium,0,Project report Table 6.2 (illustrative reference snapshot),2026-10-19
+Azure,eastus,D4s_v3,4,16,,0,SSD|HDD,reserved,0.11904,0.075,0.087,0,low,12,Project report Table 6.2 (illustrative reference snapshot),2026-10-19
+Azure,eastus,D8s_v3,8,32,,0,SSD|HDD,on_demand,0.384,0.075,0.087,0,low,0,Project report Table 6.2 (illustrative reference snapshot),2026-10-19
+Azure,eastus,D8s_v3,8,32,,0,SSD|HDD,spot,0.14592,0.075,0.087,0,medium,0,Project report Table 6.2 (illustrative reference snapshot),2026-10-19
+Azure,eastus,D8s_v3,8,32,,0,SSD|HDD,reserved,0.23808,0.075,0.087,0,low,12,Project report Table 6.2 (illustrative reference snapshot),2026-10-19
+Azure,eastus,NC4as_T4_v3,4,16,NVIDIA T4,1,SSD|HDD,on_demand,0.526,0.075,0.087,0,low,0,Project report Table 6.2 (illustrative reference snapshot),2026-10-19
+Azure,eastus,NC4as_T4_v3,4,16,NVIDIA T4,1,SSD|HDD,spot,0.19988,0.075,0.087,0,medium,0,Project report Table 6.2 (illustrative reference snapshot),2026-10-19
+Azure,eastus,NC4as_T4_v3,4,16,NVIDIA T4,1,SSD|HDD,reserved,0.32612,0.075,0.087,0,low,12,Project report Table 6.2 (illustrative reference snapshot),2026-10-19
+GCP,us-central1,n2-standard-2,2,8,,0,SSD|HDD,on_demand,0.0971,0.100,0.120,0,low,0,Project report Table 6.2 (illustrative reference snapshot),2026-10-19
+GCP,us-central1,n2-standard-2,2,8,,0,SSD|HDD,spot,0.021362,0.100,0.120,0,medium,0,Project report Table 6.2 (illustrative reference snapshot),2026-10-19
+GCP,us-central1,n2-standard-2,2,8,,0,SSD|HDD,reserved,0.061173,0.100,0.120,0,low,12,Project report Table 6.2 (illustrative reference snapshot),2026-10-19
+GCP,us-central1,n2-standard-4,4,16,,0,SSD|HDD,on_demand,0.1942,0.100,0.120,0,low,0,Project report Table 6.2 (illustrative reference snapshot),2026-10-19
+GCP,us-central1,n2-standard-4,4,16,,0,SSD|HDD,spot,0.042724,0.100,0.120,0,medium,0,Project report Table 6.2 (illustrative reference snapshot),2026-10-19
+GCP,us-central1,n2-standard-4,4,16,,0,SSD|HDD,reserved,0.122346,0.100,0.120,0,low,12,Project report Table 6.2 (illustrative reference snapshot),2026-10-19
+GCP,us-central1,n2-standard-8,8,32,,0,SSD|HDD,on_demand,0.3885,0.100,0.120,0,low,0,Project report Table 6.2 (illustrative reference snapshot),2026-10-19
+GCP,us-central1,n2-standard-8,8,32,,0,SSD|HDD,spot,0.08547,0.100,0.120,0,medium,0,Project report Table 6.2 (illustrative reference snapshot),2026-10-19
+GCP,us-central1,n2-standard-8,8,32,,0,SSD|HDD,reserved,0.244755,0.100,0.120,0,low,12,Project report Table 6.2 (illustrative reference snapshot),2026-10-19
+GCP,us-central1,n1-standard-4+T4,4,16,NVIDIA T4,1,SSD|HDD,on_demand,0.54,0.100,0.120,0,low,0,Project report Table 6.2 (illustrative reference snapshot),2026-10-19
+GCP,us-central1,n1-standard-4+T4,4,16,NVIDIA T4,1,SSD|HDD,spot,0.1188,0.100,0.120,0,medium,0,Project report Table 6.2 (illustrative reference snapshot),2026-10-19
+GCP,us-central1,n1-standard-4+T4,4,16,NVIDIA T4,1,SSD|HDD,reserved,0.3402,0.100,0.120,0,low,12,Project report Table 6.2 (illustrative reference snapshot),2026-10-19

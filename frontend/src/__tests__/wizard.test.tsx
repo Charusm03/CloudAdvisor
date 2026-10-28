@@ -115,15 +115,15 @@ describe("workload wizard", () => {
     expect(yes).toBeChecked(); expect(no).not.toBeChecked();
   });
 
-  it("runtime presets set the value; runtime above 744 is blocked", async () => {
+  it("runtime presets set the value; runtime above 730 is blocked", async () => {
     await toStep3();
-    expect(screen.getByText("Maximum: 744 hours/month")).toBeInTheDocument();
+    expect(screen.getByText("Maximum: 730 hours/month")).toBeInTheDocument();
     await userEvent.click(screen.getByRole("button", { name: "160 h" }));
     expect(screen.getByLabelText("Expected monthly runtime")).toHaveValue(160);
     await userEvent.clear(screen.getByLabelText("Expected monthly runtime"));
     await userEvent.type(screen.getByLabelText("Expected monthly runtime"), "800");
     await cont();
-    expect(screen.getByText("Runtime must be at most 744 hours")).toBeInTheDocument();
+    expect(screen.getByText("Runtime must be at most 730 hours")).toBeInTheDocument();
   });
 
   it("region choices are grouped by provider and come from the pricing data", async () => {
@@ -150,7 +150,7 @@ describe("workload wizard", () => {
     await userEvent.click(await screen.findByRole("button", { name: /Compare Cloud Options/ }));
     expect(await screen.findByRole("heading", { name: "Why we recommend this" })).toBeInTheDocument();
     const call = vi.mocked(fetch).mock.calls.find(([u]) => String(u).includes("/preview"))!;
-    expect(JSON.parse((call[1] as RequestInit).body as string)).toMatchObject({ gpu_required: false, gpu_type: null, interruption_tolerant: false, preferred_region: "any" });
+    expect(JSON.parse((call[1] as RequestInit).body as string)).toMatchObject({ gpu_required: false, gpu_type: null, gpu_count: 0, interruption_tolerant: false, preferred_region: "any" });
   });
 
   it("shows the staged progress list while waiting for the backend", async () => {

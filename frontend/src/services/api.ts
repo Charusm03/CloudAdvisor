@@ -1,4 +1,4 @@
-import type { ApiErrorBody, PricingRecord, RecommendationResponse, WorkloadProfile } from "../types";
+import type { ApiErrorBody, PricingMeta, PricingRecord, RecommendationResponse, WorkloadProfile } from "../types";
 
 const BASE = (import.meta.env.VITE_API_URL as string | undefined) ?? "http://localhost:5000";
 
@@ -36,4 +36,8 @@ export function analyzeWorkload(workload: WorkloadProfile): Promise<Recommendati
 
 export function fetchPricing(): Promise<PricingRecord[]> {
   return request<PricingRecord[]>("/api/pricing");
+}
+
+export function fetchPricingMeta(): Promise<PricingMeta> {
+  return request<PricingMeta>("/api/pricing/meta");
 }

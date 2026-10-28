@@ -10,14 +10,14 @@ import { LoadingAnalysis } from "../components/common/LoadingAnalysis";
 import { ErrorState } from "../components/common/ErrorState";
 import { ResultsDashboard } from "../components/results/ResultsDashboard";
 import { useAnalysis, useForm } from "../context/AppContext";
-import { toWorkload, validateForm, validateStep, type FormErrors, type FormState, type StepId } from "../services/validation";
+import { toForm, toWorkload, validateForm, validateStep, type FormErrors, type FormState, type StepId } from "../services/validation";
 
 /** Pace of the analysis progress animation (0 in tests so they stay fast). */
 const STAGE_MS = import.meta.env.MODE === "test" ? 0 : 450;
 
 export default function NewAnalysis() {
   const { form, setForm, resetForm, loadDemo } = useForm();
-  const { loading, result, error, run, clear, save } = useAnalysis();
+  const { loading, result, error, run, clear, save, refine } = useAnalysis();
   const nav = useNavigate();
   const loc = useLocation();
   const initialStep = ((loc.state as { step?: number } | null)?.step ?? 1) as 1 | 2 | 3 | 4;
@@ -122,7 +122,8 @@ export default function NewAnalysis() {
 
       {showResults && result && (
         <ResultsDashboard data={result} onNew={newAnalysis} onModify={modify} saved={saved}
-          onSave={(name) => { if (save(name)) setSaved(true); }} />
+          onSave={(name) => { if (save(name)) setSaved(true); }}
+          onRecompute={async (w) => { setForm(toForm(w)); setSaved(false); await refine(w); }} />
       )}
 
       {!submitted && (

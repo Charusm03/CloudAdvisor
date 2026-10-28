@@ -4,16 +4,21 @@ export default function Methodology() {
   return (
     <div className="page-pad prose">
       <h1 className="page-title">Methodology</h1>
-      <p className="step-sub">Every number in a result can be reproduced from your workload, the pricing snapshot and the rules below. The advisor is deterministic: it uses no machine learning and no live prices.</p>
+      <p className="step-sub">Every number in a result can be reproduced from your workload, the pricing snapshot and the rules below. The recommendation itself is deterministic: costs and ranking use no machine learning and no live prices. An optional, advisory workload classifier is described in section 6.</p>
 
       <section aria-labelledby="m1"><h2 id="m1">1. Workload requirements</h2>
-        <p>You describe vCPU, RAM, storage (GB and SSD/HDD), monthly inbound and outbound data, usage pattern, expected runtime (at most 744 hours/month), GPU needs, interruption tolerance and region.</p></section>
+        <p>You describe vCPU, RAM, storage (GB and SSD/HDD), monthly inbound and outbound data, usage pattern, expected runtime (at most 730 hours/month), GPU type and count, interruption tolerance and region. vCPU must be a whole number.</p></section>
 
       <section aria-labelledby="m2"><h2 id="m2">2. Candidate matching</h2>
         <p>A pricing record is a candidate only if it passes every hard filter:</p>
         <ul><li>vCPU and RAM are at least what you requested.</li><li>The storage type you chose is supported.</li>
-          <li>The region matches, or you chose “Any supported region”.</li>
-          <li>If a GPU is required, the GPU type matches exactly with at least one GPU. GPU instances are excluded when no GPU is requested.</li></ul></section>
+          <li>The region matches: “Any supported region”, a region group such as United States or Europe (which maps to one region per provider), or one specific region.</li>
+          <li>If a GPU is required, the GPU type matches exactly with at least your requested number of GPUs. GPU instances are excluded when no GPU is requested.</li></ul>
+        <p>Pricing-model eligibility is then applied <strong>before</strong> any cost is computed:</p>
+        <ul><li><strong>On-demand</strong> is always eligible.</li>
+          <li><strong>Spot</strong> is offered only if the workload tolerates interruption.</li>
+          <li><strong>Reserved</strong> is offered only for steady-state workloads running at least 500 hours/month (the break-even is about 482 hours for a 34% discount).</li></ul>
+        <p>Finally, for each provider, region and pricing model only the <strong>smallest fitting instance</strong> is kept (ties go to the cheaper one), so you never pay for capacity you did not ask for and one region yields at most nine candidates.</p></section>
 
       <section aria-labelledby="m3"><h2 id="m3">3. Cost calculation</h2>
         <Formula>{`Compute (On-Demand)  = hourly price × monthly runtime
@@ -21,8 +26,8 @@ Compute (Spot)       = hourly price × monthly runtime × (1 + 10% re-run overhe
 Compute (Reserved)   = hourly price × max(monthly runtime, 730)
 Storage cost         = storage GB × storage price per GB-month
 Egress cost          = outbound GB × egress price per GB
-Ingress cost         = inbound GB × ingress price per GB
-Total                = compute + storage + egress + ingress
+Total                = compute + storage + egress
+(Inbound data is normally free; set INCLUDE_INGRESS=1 on the backend to bill it.)
 Savings              = baseline total − recommended total
 Savings %            = savings ÷ baseline total × 100`}</Formula>
         <p>Reserved capacity is billed for the whole month, and spot adds a 10% overhead for re-running interrupted work. Both values are configurable in the backend.</p></section>
@@ -40,15 +45,17 @@ Savings %            = savings ÷ baseline total × 100`}</Formula>
         <p className="help">Default values from <code>backend/config.py</code>. If that file changes, these numbers change with it.</p></section>
 
       <section aria-labelledby="m5"><h2 id="m5">5. Recommendation ranking</h2>
-        <Formula>{`score = 0.70 × cost score + 0.10 × workload fit + 0.20 × suitability
-        − interruption penalty − commitment penalty
+        <Formula>{`rank = ascending total monthly cost
+       (ties: provider, region, instance, pricing model)
 
-cost score   = cheapest candidate total ÷ this candidate total
-workload fit = (requested vCPU ÷ vCPU + requested RAM ÷ RAM) ÷ 2`}</Formula>
-        <p>The interruption penalty applies to spot only (low 0, medium 0.03, high 0.08). Reserved pricing for a bursty workload carries a 0.15 penalty. Spot options for a workload that cannot be interrupted always sort after every other option, so they appear only as alternatives. Ties are broken by total cost, then provider, region and instance name, so results are repeatable.</p></section>
+workload fit = (requested vCPU ÷ vCPU + requested RAM ÷ RAM) ÷ 2   (shown for information)`}</Formula>
+        <p>Candidates are ordered by total monthly cost, lowest first, and the top three are shown. Because ineligible pricing models are never generated, a spot or reserved option can only appear when your workload qualifies for it. Ties are broken by provider, region and instance name, so results are repeatable. The workload-fit and suitability values are reported alongside each option but do not change the order. (The backend can optionally use a weighted cost/fit/suitability score with RANKING_MODE=weighted.)</p></section>
 
       <section aria-labelledby="m6"><h2 id="m6">6. Explainability</h2>
-        <p>Explanations are assembled from the cost breakdown, the fit values and the rules above. No sentence is generated by a model. They state the requirement match, the itemised cost, the fit, the pricing-model suitability and the interruption risk. They also state the gap to the next option (“effectively tied” within 2%), egress when it is at least 25% of the total, and a trade-off sentence when another option has cheaper compute but a higher total.</p></section>
+        <p>Explanations are assembled from the cost breakdown, the fit values and the rules above. No sentence is generated by a model. They state the requirement match, the itemised cost, the fit, the pricing-model suitability, the interruption risk, why the pricing model was eligible, and the largest cost driver. They also state the gap to the next option (“effectively tied” within 2%), egress when it is at least 25% of the total, and a trade-off sentence when another option has cheaper compute but a higher total.</p></section>
+
+      <section aria-labelledby="m6b"><h2 id="m6b">6b. Workload classifier (advisory)</h2>
+        <p>A random-forest model, trained on synthetic archetype profiles and cross-validated (stratified 5-fold, accuracy and macro-F1), predicts which usage pattern your profile resembles and shows its strategy prior. It is advisory only: your selected pattern is always what the engine uses, and the prediction can never make a pricing model eligible or ineligible.</p></section>
 
       <section aria-labelledby="m7"><h2 id="m7">7. Limitations</h2>
         <ul><li>Prices come from a dated snapshot and are illustrative. They are not live quotes.</li>

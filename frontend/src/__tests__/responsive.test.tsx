@@ -23,11 +23,11 @@ describe("responsive layout contract", () => {
       else expect(maxes.some((m) => m >= w)).toBe(true);
     });
 
-  it("provides sidebar, header nav and mobile bottom nav", async () => {
+  it("provides one sidebar menu and a mobile bottom nav (no duplicate top menu)", async () => {
     await renderApp();
     expect(screen.getByRole("complementary", { name: "Sidebar" })).toBeInTheDocument();
     expect(screen.getByRole("navigation", { name: "Mobile" })).toBeInTheDocument();
-    expect(screen.getByRole("navigation", { name: "Primary" })).toBeInTheDocument();
+    expect(screen.queryByRole("navigation", { name: "Primary" })).not.toBeInTheDocument();
     expect(css).toMatch(/@media \(max-width: 720px\)[\s\S]*\.sidebar \{ display: none; \}/);
     expect(css).toMatch(/\.mobilenav \{ display: none; \}/);
   });

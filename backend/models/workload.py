@@ -25,6 +25,7 @@ class Workload:
     usage_pattern: str
     gpu_required: bool
     gpu_type: Optional[str]
+    gpu_count: int
     expected_runtime_hours_per_month: Decimal
     interruption_tolerant: bool
     preferred_region: str = "any"
@@ -37,6 +38,7 @@ class Workload:
             monthly_data_transfer_in_gb=D(d["monthly_data_transfer_in_gb"]),
             monthly_data_transfer_out_gb=D(d["monthly_data_transfer_out_gb"]),
             usage_pattern=d["usage_pattern"], gpu_required=d["gpu_required"], gpu_type=d.get("gpu_type"),
+            gpu_count=int(d.get("gpu_count") or (1 if d["gpu_required"] else 0)),
             expected_runtime_hours_per_month=D(d["expected_runtime_hours_per_month"]),
             interruption_tolerant=d["interruption_tolerant"],
             preferred_region=d.get("preferred_region", "any"))
@@ -54,13 +56,14 @@ class WorkloadProfile(Base):
     usage_pattern: Mapped[str] = mapped_column(String(32))
     gpu_required: Mapped[bool] = mapped_column(Boolean)
     gpu_type: Mapped[Optional[str]] = mapped_column(String(32), nullable=True)
+    gpu_count: Mapped[int] = mapped_column(Integer, default=0)
     expected_runtime_hours_per_month: Mapped[float] = mapped_column(Float)
     interruption_tolerant: Mapped[bool] = mapped_column(Boolean)
     preferred_region: Mapped[str] = mapped_column(String(64), default="any")
     created_at: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(timezone.utc).replace(tzinfo=None))
 
     FIELDS = ("vcpu", "ram_gb", "storage_gb", "storage_type", "monthly_data_transfer_in_gb",
-              "monthly_data_transfer_out_gb", "usage_pattern", "gpu_required", "gpu_type",
+              "monthly_data_transfer_out_gb", "usage_pattern", "gpu_required", "gpu_type", "gpu_count",
               "expected_runtime_hours_per_month", "interruption_tolerant", "preferred_region")
 
     def to_dict(self):

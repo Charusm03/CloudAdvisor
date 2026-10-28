@@ -11,7 +11,7 @@ const PAGE = 30;
 const price = (n: number) => `$${n.toFixed(n < 1 ? 4 : 2)}`;
 
 export default function PricingData() {
-  const { records, loading, error, retry, snapshotDate } = usePricing();
+  const { records, loading, error, retry, snapshotDate, freshness } = usePricing();
   const [prov, setProv] = useState(""); const [region, setRegion] = useState(""); const [model, setModel] = useState("");
   const [q, setQ] = useState(""); const [shown, setShown] = useState(PAGE);
   const regions = useMemo(() => [...new Set(records.filter((r) => !prov || r.provider === prov).map((r) => r.region))].sort(), [records, prov]);
@@ -25,7 +25,8 @@ export default function PricingData() {
       <h1 className="page-title">Pricing data</h1>
       <p className="step-sub">View the normalized pricing records used by the advisor.</p>
       <div className="panel meta-panel">
-        <div><strong>Snapshot date</strong><p>{snapshotDate ? fmtDate(snapshotDate) : "Loading…"} <Term k="snapshot" bare /></p></div>
+        <div><strong>Snapshot date</strong><p>{snapshotDate ? fmtDate(snapshotDate) : "Loading…"} <Term k="snapshot" bare />
+          {freshness && <small className="sub">{freshness.age_days} days old · {freshness.status === "stale" ? `stale (older than ${freshness.stale_after_days} days)` : "fresh"}</small>}</p></div>
         <div><strong>Data source</strong>{sources.length ? <ul>{sources.map((s) => <li key={s}>{s}</li>)}</ul> : <p>Loading…</p>}</div>
         <p className="notice">This is a dated snapshot, not live pricing. Prices change and the figures can differ from current provider rates.</p>
       </div>

@@ -37,10 +37,6 @@ h2:focus { outline: none; }
 .brand-text { display: flex; flex-direction: column; line-height: 1.15; min-width: 0; }
 .brand-text strong { font-family: var(--font-display); font-size: 1.05rem; white-space: nowrap; }
 .brand-text small { color: #aab3dd; font-size: .72rem; white-space: nowrap; }
-.topnav { display: flex; gap: .25rem; margin-left: auto; }
-.topnav a { color: #c9d0f0; text-decoration: none; padding: .45rem .75rem; border-radius: 6px; font-size: .9rem; }
-.topnav a:hover { background: var(--navy-2); color: #fff; }
-.topnav a.active { color: #fff; background: var(--navy-2); box-shadow: inset 0 -2px 0 var(--accent); }
 .topbar-right { display: flex; align-items: center; gap: .75rem; }
 .snapshot { display: inline-flex; align-items: center; gap: .4rem; font-size: .82rem; color: #c9d0f0; padding: .3rem .6rem; border: 1px solid var(--navy-line); border-radius: 999px; white-space: nowrap; }
 .snapshot strong { color: #fff; font-weight: 500; }
@@ -75,6 +71,9 @@ h2:focus { outline: none; }
 .link { background: none; border: 0; color: var(--accent); cursor: pointer; font: inherit; display: inline-flex; gap: .3rem; align-items: center; padding: 0; text-decoration: underline; }
 .panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 1.25rem; margin-bottom: 1rem; box-shadow: var(--shadow); }
 .panel h3 { margin-bottom: .85rem; }
+.grid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem 1.25rem; }
+.check-row { display: flex; align-items: center; gap: .6rem; margin-top: .9rem; }
+.gpu-count { margin-top: 1rem; max-width: 18rem; }
 .grid2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem 1.25rem; }
 .field { min-width: 0; } .field-label { display: flex; align-items: center; gap: .4rem; margin-bottom: .35rem; font-weight: 500; font-size: .9rem; flex-wrap: wrap; }
 .field-hint { color: var(--text-3); font-weight: 400; font-size: .82rem; display: inline-flex; align-items: center; gap: .25rem; }
@@ -255,13 +254,13 @@ table.data.compact td, table.data.compact th { white-space: normal; pointer-even
 code { background: var(--line-2); padding: .1rem .35rem; border-radius: 4px; font-size: .85em; }
 
 /* ---------- responsive ---------- */
-@media (max-width: 1180px) { .topnav { display: none; } .topbar-right { margin-left: auto; } }
 @media (max-width: 1024px) { .hero { grid-template-columns: minmax(0, 1fr); } .hero h1 { max-width: 20ch; } .why-list, .prov-grid { grid-template-columns: minmax(0, 1fr); } .prov-compare, .top3 { grid-template-columns: minmax(0, 1fr); } .two-col { grid-template-columns: minmax(0, 1fr); } .decision { grid-template-columns: minmax(0, 1fr); } .decision-side { border-left: 0; border-top: 1px solid var(--navy-line); } .steps4 { grid-template-columns: repeat(2, 1fr); border-top: 0; } .steps4 li { border-top: 2px solid var(--ink); margin-bottom: 1rem; } }
 @media (max-width: 720px) {
   .shell, .shell.is-collapsed, .shell:not(.is-collapsed) { grid-template-columns: minmax(0, 1fr); grid-template-areas: "top" "main"; padding-bottom: 64px; }
   .sidebar { display: none; } .brand-text small, .snapshot span:not(:has(strong)) { display: none; } .snapshot { font-size: .75rem; }
   .mobilenav { display: flex; position: fixed; bottom: 0; left: 0; right: 0; z-index: 40; background: var(--ink); border-top: 1px solid var(--navy-line); padding-bottom: env(safe-area-inset-bottom); }
   .mobilenav a { flex: 1; display: grid; justify-items: center; gap: 2px; padding: .5rem .25rem; color: #aab3dd; text-decoration: none; font-size: .68rem; } .mobilenav a.active { color: #fff; box-shadow: inset 0 3px 0 var(--accent); }
+  .grid3 { grid-template-columns: minmax(0, 1fr); }
   .grid2, .split, .meta-panel, .choices2, .region-groups { grid-template-columns: minmax(0, 1fr); } .choices4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } .kv.wide { grid-template-columns: minmax(0, 1fr); }
   .flow-inputs { grid-template-columns: repeat(2, 1fr); } .results-bar { position: static; } .vs > div { grid-template-columns: minmax(0, 1fr); } .vs strong { grid-column: 1; }
   .decision-main, .decision-side { padding: 1.25rem; } .step-label { font-size: .85rem; }

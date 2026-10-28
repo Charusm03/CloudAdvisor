@@ -3,7 +3,7 @@ import type { Candidate, PricingRecord, Recommendation, RecommendationResponse, 
 export const workload: WorkloadProfile = {
   vcpu: 4, ram_gb: 16, storage_gb: 200, storage_type: "SSD", monthly_data_transfer_in_gb: 100, monthly_data_transfer_out_gb: 1000,
   usage_pattern: "steady-state", gpu_required: false, gpu_type: null, expected_runtime_hours_per_month: 720,
-  interruption_tolerant: false, preferred_region: "any",
+  interruption_tolerant: false, preferred_region: "any", gpu_count: 0,
 };
 
 const cand = (o: Partial<Candidate>): Candidate => ({
@@ -19,6 +19,9 @@ const rec = (o: Partial<Candidate>): Recommendation => ({
     summary: `${o.provider ?? "Azure"} ${o.instance_type ?? "D4s_v3"} is recommended.`,
     reasons: ["Satisfies the requested 4 vCPU / 16 GB RAM (offers 4 vCPU / 16 GB).", "Estimated $111.80/month = compute $86.90 + storage $7.50 + egress $17.40 + ingress $0.00.", "Interruption risk: low."],
     tradeoffs: [], warnings: [],
+    dominant_driver: { component: "compute", amount: 86.9, share_pct: 77.7 },
+    eligibility_reason: "Eligible because the workload is steady-state and runs 720 h/month (at least 500 h).",
+    delta_vs_best_pct: 0, effectively_tied: false,
   },
   warnings: [], savings: { cheapest_on_demand: sav(53.26, 32.3), aws_on_demand: sav(53.26, 32.3), azure_on_demand: sav(10, 8.2), gcp_on_demand: null },
 });
@@ -42,7 +45,10 @@ export const baselines = {
 export const response: RecommendationResponse = {
   workload, recommendations: [r1, r2, r3], best_overall: r1, cheapest_valid: r1,
   provider_comparison: { AWS: r2, Azure: r1, GCP: gcpOnDemand }, candidates: [r1, r2, r3, gcpOnDemand], baselines,
-  pricing_snapshot_date: "2026-10-19",
+  pricing_snapshot_date: "2026-10-19", pricing_freshness: { snapshot_date: "2026-10-19", age_days: 5, status: "fresh", stale_after_days: 30 },
+  classification: { predicted_pattern: "steady-state", confidence: 0.91, probabilities: { "steady-state": 0.91, bursty: 0.05 }, selected_pattern: "steady-state",
+    matches_selected: true, strategy_prior: "Steady services usually benefit from reserved/committed capacity when they run most of the month.",
+    suggested_defaults: { expected_runtime_hours_per_month: 720, interruption_tolerant: false }, top_features: [{ feature: "runtime_ratio", importance: 0.18 }], advisory_only: true },
   assumptions: ["Pricing snapshot: 2026-10-19. Not real-time pricing.", "Currency: USD.", "Runtime assumption: 720 hours per month.", "Not modelled: taxes."],
 };
 
@@ -64,3 +70,12 @@ export const pricing: PricingRecord[] = [
   rec2({ id: 5, provider: "AWS", region: "eu-west-1", instance_type: "g4dn.xlarge", vcpu: 4, ram_gb: 16, gpu_type: "NVIDIA T4", gpu_count: 1 }),
   rec2({ id: 6, provider: "GCP", region: "europe-west1", instance_type: "a2-highgpu-1g", vcpu: 12, ram_gb: 85, gpu_type: "NVIDIA A100", gpu_count: 1 }),
 ];
+
+export const pricingMeta = {
+  records: 6, freshness: { snapshot_date: "2026-10-19", age_days: 5, status: "fresh", stale_after_days: 30 },
+  gpu_types: ["NVIDIA A100", "NVIDIA T4"], regions: { AWS: ["eu-west-1", "us-east-1"], Azure: ["eastus"], GCP: ["europe-west1", "us-central1"] },
+  region_groups: {
+    us: { label: "United States", regions: { AWS: ["us-east-1"], Azure: ["eastus"], GCP: ["us-central1"] } },
+    europe: { label: "Europe", regions: { AWS: ["eu-west-1"], Azure: ["westeurope"], GCP: ["europe-west1"] } },
+  },
+};

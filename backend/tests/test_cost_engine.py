@@ -36,12 +36,17 @@ def test_k05_zero_inbound_k06_zero_outbound():
     r = rec(ingress="0.01")
     assert cost(wl(monthly_data_transfer_in_gb=0), r).ingress == 0
     assert cost(wl(monthly_data_transfer_out_gb=0), r).egress == 0
-    assert cost(wl(monthly_data_transfer_in_gb=100), r).ingress == 1
+    # inbound transfer is excluded from the total by default (Requirement section 8) ...
+    assert cost(wl(monthly_data_transfer_in_gb=100), r).ingress == 0
+    # ... and only billed when explicitly enabled
+    from dataclasses import replace
+    from backend.config import DEFAULT_COST_CONFIG
+    assert cost(wl(monthly_data_transfer_in_gb=100), r, replace(DEFAULT_COST_CONFIG, include_ingress=True)).ingress == 1
 
 
-def test_k07_max_runtime_744():
-    assert cost(wl(expected_runtime_hours_per_month=744, storage_gb=0, monthly_data_transfer_out_gb=0,
-                   monthly_data_transfer_in_gb=0), rec(price="0.10")).compute == D("74.4")
+def test_k07_max_runtime_730():
+    assert cost(wl(expected_runtime_hours_per_month=730, storage_gb=0, monthly_data_transfer_out_gb=0,
+                   monthly_data_transfer_in_gb=0), rec(price="0.10")).compute == D("73.0")
 
 
 def test_k08_spot_with_overhead():

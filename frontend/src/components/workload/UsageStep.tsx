@@ -79,6 +79,10 @@ export function UsageStep({ form, errors, set }: { form: FormState; errors: Form
                 </label>
               ))}
             </fieldset>
+            <div className="gpu-count">
+              <Field id="gpu_count" labelText="Number of GPUs" label={null} unit="GPUs" step="1" min="1" value={form.gpu_count}
+                onChange={(v) => set({ gpu_count: v })} error={errors.gpu_count} help="Instances with at least this many GPUs are considered." />
+            </div>
             {!loading && gpuTypes.length === 0 && <p className="field-error">GPU options couldn't be loaded from the pricing data.</p>}
             {errors.gpu_type && <p className="field-error">{errors.gpu_type}</p>}
           </div>

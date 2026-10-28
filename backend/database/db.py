@@ -16,10 +16,22 @@ def make_engine(url):
     return create_engine(url, connect_args={"check_same_thread": False} if url.startswith("sqlite") else {})
 
 
+def _migrate(engine):
+    """Tiny forward-only migration: databases created before gpu_count existed get the column added."""
+    from sqlalchemy import inspect, text
+    insp = inspect(engine)
+    if "workload_profiles" in insp.get_table_names():
+        cols = {c["name"] for c in insp.get_columns("workload_profiles")}
+        if "gpu_count" not in cols:
+            with engine.begin() as conn:
+                conn.execute(text("ALTER TABLE workload_profiles ADD COLUMN gpu_count INTEGER DEFAULT 0"))
+
+
 def init_db(app, url):
     from backend.models import pricing, workload  # noqa: F401  (register tables)
     engine = make_engine(url)
     Base.metadata.create_all(engine)
+    _migrate(engine)
     app.extensions["engine"] = engine
     app.extensions["session_factory"] = sessionmaker(engine, expire_on_commit=False)
 

@@ -24,7 +24,7 @@ with sync_playwright() as p:
     pg.get_by_role("button", name="Show all assumptions").click(); pg.get_by_role("button", name="Save analysis").click(); total += audit(pg, "results (assumptions open, save open)")
     pg.get_by_role("button", name="Save", exact=True).click()
     for path, name in (("/analyses", "my analyses (with data)"), ("/pricing", "pricing data"), ("/methodology", "methodology")):
-        pg.get_by_role("navigation", name="Primary").get_by_role("link", name={"/analyses":"My Analyses","/pricing":"Pricing Data","/methodology":"Methodology"}[path]).click()
+        pg.get_by_role("navigation", name="Sections").get_by_role("link", name={"/analyses":"My Analyses","/pricing":"Pricing Data","/methodology":"Methodology"}[path]).click()
         pg.wait_for_selector("h1"); pg.wait_for_timeout(500); total += audit(pg, name)
     pg.evaluate("localStorage.clear()"); pg.goto(BASE + "/analyses"); pg.wait_for_selector("h2"); total += audit(pg, "my analyses (empty)")
     m = b.new_page(viewport={"width": 390, "height": 844}); m.goto(BASE); m.wait_for_selector("h1"); m.wait_for_load_state("networkidle"); total += audit(m, "overview @390")

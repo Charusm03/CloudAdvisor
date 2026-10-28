@@ -13,6 +13,7 @@ function Marker({ p, x, y, r, best }: { p: ProviderName; x: number; y: number; r
 
 export function CostVsFitChart({ candidates, best }: { candidates: Candidate[]; best: Candidate }) {
   const costs = candidates.map((c) => c.total_monthly_cost);
+  const sameFit = candidates.length > 1 && new Set(candidates.map(fitPct)).size === 1;
   const min = Math.min(...costs), max = Math.max(...costs);
   const pad = (max - min || max || 1) * 0.08;
   const x0 = Math.max(0, min - pad), x1 = max + pad;
@@ -23,6 +24,7 @@ export function CostVsFitChart({ candidates, best }: { candidates: Candidate[]; 
     <section id="chart" className="block-sm" aria-labelledby="chart-h">
       <h3 id="chart-h">Cost vs workload fit</h3>
       <p className="lead-sm">Upper-left options provide a stronger combination of low cost and high workload fit.</p>
+      {sameFit && <p className="help" role="note">All options use the same instance size, so they have the same workload fit ({fitPct(best)}%). Only cost differs: the further left, the cheaper.</p>}
       <svg viewBox={`0 0 ${W} ${H}`} className="chart" role="img"
         aria-label={`Scatter chart of ${candidates.length} compatible options by monthly cost (${usd(min)} to ${usd(max)}) and workload fit. The recommended option is outlined.`}>
         {[0, 25, 50, 75, 100].map((t) => (

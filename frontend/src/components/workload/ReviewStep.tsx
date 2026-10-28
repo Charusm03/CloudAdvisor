@@ -3,6 +3,8 @@ import { gpuLabel, num } from "../../lib/format";
 import type { FormState } from "../../services/validation";
 
 type Go = (s: 1 | 2 | 3) => void;
+const GROUP_NAMES: Record<string, string> = { us: "United States (all providers)", europe: "Europe (all providers)" };
+const regionText = (r: string) => (r === "any" ? "Any supported region" : GROUP_NAMES[r] ?? r);
 
 function Row({ title, step, go, children }: { title: string; step: 1 | 2 | 3; go: Go; children: React.ReactNode }) {
   return (
@@ -26,8 +28,8 @@ export function ReviewStep({ form, go, onSubmit, busy }: { form: FormState; go: 
         <Row title="Usage" step={3} go={go}>{patternLabel}</Row>
         <Row title="Runtime" step={3} go={go}>{num(Number(form.expected_runtime_hours_per_month))} hours/month</Row>
         <Row title="Interruption" step={3} go={go}>{form.interruption_tolerant ? "Tolerated (spot-style capacity allowed)" : "Not tolerated"}</Row>
-        <Row title="GPU" step={3} go={go}>{form.gpu_required ? gpuLabel(form.gpu_type) : "None"}</Row>
-        <Row title="Region" step={3} go={go}>{form.preferred_region === "any" ? "Any supported region" : form.preferred_region}</Row>
+        <Row title="GPU" step={3} go={go}>{form.gpu_required ? `${Number(form.gpu_count) || 1} × ${gpuLabel(form.gpu_type)}` : "None"}</Row>
+        <Row title="Region" step={3} go={go}>{regionText(form.preferred_region)}</Row>
       </div>
       <div className="row end"><button type="button" className="btn btn-primary btn-lg" onClick={onSubmit} disabled={busy}>Compare Cloud Options <ArrowRight size={18} aria-hidden="true" /></button></div>
     </section>

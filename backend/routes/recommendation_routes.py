@@ -1,8 +1,9 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, current_app, jsonify, request
 
 from backend.database.db import session_scope
 from backend.services import workload_service as ws
-from backend.services.pricing_service import all_rows
+from backend.ml.classifier import MLWorkloadClassifier
+from backend.services.pricing_service import all_rows, freshness
 from backend.services.recommendation_engine import recommend
 from backend.services.workload_classifier import ManualWorkloadClassifier
 from backend.utils.validation import ValidationError, validate_workload
@@ -17,6 +18,9 @@ def _run(session, workload_dict):
     w = ws.to_engine_workload(workload_dict)
     result = recommend(w, all_rows(session))
     result["workload"] = workload_dict
+    # Advisory ML classification: shown next to the result, never used to change eligibility (FR-CLS-06).
+    result["classification"] = MLWorkloadClassifier.classify(workload_dict, selected=workload_dict["usage_pattern"])
+    result["pricing_freshness"] = freshness(result["pricing_snapshot_date"], current_app.config["PRICING_STALE_AFTER_DAYS"])
     return result
 
 

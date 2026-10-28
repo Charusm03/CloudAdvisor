@@ -14,7 +14,7 @@ async function openResults(data: RecommendationResponse = response) {
   await userEvent.click(screen.getByRole("button", { name: "View Example Analysis" }));
   await screen.findByRole("heading", { name: "Why we recommend this" });
 }
-const primaryNav = () => within(screen.getByRole("navigation", { name: "Primary" }));
+const primaryNav = () => within(screen.getByRole("navigation", { name: "Sections" }));
 
 describe("results dashboard", () => {
   it("leads with the recommendation: provider, instance, pricing model, region, cost, savings, fit", async () => {
@@ -105,7 +105,7 @@ describe("results dashboard", () => {
     const pm = within(screen.getByRole("region", { name: "Pricing model comparison table" }));
     expect(pm.getByText("$111.80 / mo")).toBeInTheDocument(); // reserved cheapest
     expect(pm.getByText(/12-month commitment/)).toBeInTheDocument();
-    expect(pm.getByText(/alternative only: your workload isn't interruption tolerant/)).toBeInTheDocument();
+    expect(pm.queryByText(/alternative only/)).not.toBeInTheDocument();
     expect(screen.getByRole("img", { name: /Scatter chart of 4 compatible options/ })).toBeInTheDocument();
     expect(screen.getByText(/Upper-left options provide a stronger combination/)).toBeInTheDocument();
   });
@@ -115,7 +115,7 @@ describe("results dashboard", () => {
       reasons: ["Satisfies the requested 4 vCPU / 16 GB RAM.", "Estimated $111.80/month = compute $86.90.", "Resource fit: 100%.", "Pricing model suitability: 1.0.",
         "Interruption risk: low.", "Outbound data is 15% of the total."] } } };
     await openResults({ ...six, recommendations: [six.best_overall, response.recommendations[1], response.recommendations[2]] });
-    const items = within(document.getElementById("why")!).getAllByRole("listitem");
+    const items = within(document.getElementById("why")!.querySelector("ul.checks:not([aria-label])") as HTMLElement).getAllByRole("listitem");
     expect(items.length).toBeLessThanOrEqual(5);
     expect(document.getElementById("why")).toHaveTextContent("Outbound data is 15% of the total.");
     expect(document.getElementById("why")).not.toHaveTextContent("Interruption risk: low.");
@@ -126,7 +126,7 @@ describe("results dashboard", () => {
   it("assumptions are collapsible, with key facts always visible", async () => {
     await openResults();
     const sec = within(document.getElementById("assumptions")!);
-    expect(sec.getByText("Currency: USD")).toBeInTheDocument(); expect(sec.getByText("Pricing snapshot: Oct 19, 2026")).toBeInTheDocument();
+    expect(sec.getByText("Currency: USD")).toBeInTheDocument(); expect(sec.getByText(/Pricing snapshot: Oct 19, 2026/)).toBeInTheDocument();
     expect(sec.queryByText("Why this matters")).not.toBeInTheDocument();
     await userEvent.click(sec.getByRole("button", { name: /Show all assumptions/ }));
     expect(sec.getByText("Runtime assumption: 720 hours per month.")).toBeInTheDocument();
@@ -263,7 +263,7 @@ describe("pricing data and methodology pages", () => {
     for (const n of ["1. Workload requirements", "2. Candidate matching", "3. Cost calculation", "4. Pricing-model suitability", "5. Recommendation ranking", "6. Explainability", "7. Limitations"]) expect(screen.getByRole("heading", { name: n })).toBeInTheDocument();
     const flat = document.body.textContent!.replace(/\s+/g, " ");
     expect(flat).toContain("Egress cost = outbound GB × egress price per GB");
-    expect(flat).toContain("Total = compute + storage + egress + ingress");
+    expect(flat).toContain("Total = compute + storage + egress");
     expect(flat).toContain("Compute (On-Demand) = hourly price × monthly runtime");
   });
 });

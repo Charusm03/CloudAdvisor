@@ -13,6 +13,14 @@ class Config:
     CORS_ORIGINS = os.environ.get("CORS_ORIGINS", "http://localhost:5173").split(",")
     MAX_CONTENT_LENGTH = 16 * 1024  # request size limit (bytes)
     TESTING = False
+    DEBUG = os.environ.get("FLASK_DEBUG", "0") == "1"
+    # Simple in-memory rate limit per client IP (requests per window). 0 disables it.
+    RATE_LIMIT_REQUESTS = int(os.environ.get("RATE_LIMIT_REQUESTS", "120"))
+    RATE_LIMIT_WINDOW_SECONDS = int(os.environ.get("RATE_LIMIT_WINDOW_SECONDS", "60"))
+    # Pricing data older than this many days is flagged as stale in API responses.
+    PRICING_STALE_AFTER_DAYS = int(os.environ.get("PRICING_STALE_AFTER_DAYS", "30"))
+    # Reject the whole CSV on the first bad row (True) or skip + log bad rows (False, Requirement FR-PRC-06).
+    PRICING_STRICT = os.environ.get("PRICING_STRICT", "0") == "1"
 
 
 @dataclass(frozen=True)
@@ -23,6 +31,9 @@ class CostConfig:
     # Extra compute billed on spot capacity to re-run interrupted work (same value as the report).
     spot_rerun_overhead: Decimal = Decimal("0.10")
     reserved_billed_full_month: bool = True
+    # Requirement section 8 defines total = compute + storage + egress. Inbound transfer is normally free on
+    # all three providers; it is modelled but excluded from the total unless this is switched on.
+    include_ingress: bool = os.environ.get("INCLUDE_INGRESS", "0") == "1"
 
 
 @dataclass(frozen=True)
@@ -52,3 +63,15 @@ class ScoringConfig:
 
 DEFAULT_COST_CONFIG = CostConfig()
 DEFAULT_SCORING_CONFIG = ScoringConfig()
+
+
+@dataclass(frozen=True)
+class RankingConfig:
+    """How candidates are ordered.
+    "cost"     (default, Requirement FR-REC-01): ascending total monthly cost.
+    "weighted" : legacy weighted cost/fit/suitability score (ScoringConfig); informational scores are
+                 still reported in "cost" mode but never change the order."""
+    mode: str = os.environ.get("RANKING_MODE", "cost")
+
+
+DEFAULT_RANKING_CONFIG = RankingConfig()

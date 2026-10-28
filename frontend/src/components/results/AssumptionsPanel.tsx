@@ -13,7 +13,7 @@ export function AssumptionsPanel({ data }: { data: RecommendationResponse }) {
       <h2 id="as-h"><ListChecks size={20} aria-hidden="true" /> Calculation assumptions</h2>
       <ul className="chips-static" aria-label="Key assumptions">
         <li>Currency: USD</li><li>Runtime: {w.expected_runtime_hours_per_month} hours/month</li>
-        <li>Pricing snapshot: {fmtDate(data.pricing_snapshot_date)}</li><li>Taxes excluded</li>
+        <li>Pricing snapshot: {fmtDate(data.pricing_snapshot_date)}{data.pricing_freshness ? ` (${data.pricing_freshness.age_days} days old${data.pricing_freshness.status === "stale" ? ", stale" : ""})` : ""}</li><li>Taxes excluded</li>
       </ul>
       <button type="button" className="btn btn-quiet" aria-expanded={open} aria-controls="assume-body" onClick={() => setOpen((o) => !o)}>
         <ChevronDown size={16} aria-hidden="true" className={open ? "flip" : ""} />{open ? "Hide all assumptions" : "Show all assumptions"}

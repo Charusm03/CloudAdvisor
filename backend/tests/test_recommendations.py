@@ -21,13 +21,11 @@ def test_p02_spot_competes_when_tolerant():
     assert out[0]["pricing_model"] == "spot"
 
 
-def test_p03_p_r03_spot_never_primary_when_not_tolerant():
+def test_p03_p_r03_spot_never_generated_when_not_tolerant():
     w = wl(interruption_tolerant=False)
     recs = [rec(instance="od", price="0.50"), rec(instance="sp", model="spot", price="0.01", risk="low")]
-    out = top(w, recs)
-    assert out[0]["pricing_model"] == "on_demand"
-    assert out[1]["pricing_model"] == "spot" and out[1]["spot_not_primary"]  # present as alternative
-    assert any("alternative only" in x for x in out[1]["warnings"])
+    res = recommend(w, recs)
+    assert [c["pricing_model"] for c in res["candidates"]] == ["on_demand"]  # spot is absent, not merely ranked last
 
 
 def test_p04_reserved_preferred_for_steady_when_cheaper():
@@ -36,13 +34,12 @@ def test_p04_reserved_preferred_for_steady_when_cheaper():
     assert out[0]["pricing_model"] == "reserved"
 
 
-def test_p05_r08_reserved_not_unfairly_preferred_for_bursty():
-    # reserved is ~10% cheaper on paper but a bursty workload should not be pushed into a commitment
+def test_p05_r08_reserved_not_generated_for_bursty():
+    # reserved is ~10% cheaper on paper but a bursty workload is not eligible for a commitment
     w = wl(usage_pattern="bursty", expected_runtime_hours_per_month=730, storage_gb=0,
            monthly_data_transfer_out_gb=0, monthly_data_transfer_in_gb=0)
-    out = top(w, [rec(price="0.10"), rec(model="reserved", price="0.09", commit=12)])
-    assert out[0]["pricing_model"] == "on_demand"
-    assert any("poor fit" in x for x in out[1]["warnings"])
+    res = recommend(w, [rec(price="0.10"), rec(model="reserved", price="0.09", commit=12)])
+    assert [c["pricing_model"] for c in res["candidates"]] == ["on_demand"]
 
 
 def test_p06_batch_tolerant_spot_ranks_highly():
@@ -52,7 +49,8 @@ def test_p06_batch_tolerant_spot_ranks_highly():
 
 
 def test_r01_cheapest_valid_ranks_first_with_equal_fit():
-    out = top(wl(), [rec(instance="a", price="0.30"), rec(instance="b", price="0.10"), rec(instance="c", price="0.20")])
+    out = top(wl(), [rec(provider="AWS", instance="a", price="0.30"), rec(provider="Azure", instance="b", price="0.10"),
+                     rec(provider="GCP", instance="c", price="0.20")])
     assert [x["instance_type"] for x in out] == ["b", "c", "a"]
 
 
@@ -101,8 +99,9 @@ def test_r09_no_candidates():
 
 def test_r10_one_candidate_r11_two_candidates_r12_many():
     assert [x["rank"] for x in top(wl(), [rec()])] == [1]
-    assert len(top(wl(), [rec(instance="a"), rec(instance="b")])) == 2
-    assert len(top(wl(), [rec(instance=str(i), price=f"0.{10 + i}") for i in range(6)])) == 3
+    assert len(top(wl(), [rec(provider="AWS", instance="a"), rec(provider="GCP", instance="b")])) == 2
+    regions = [f"r{i}" for i in range(6)]
+    assert len(top(wl(), [rec(region=r, instance=r, price=f"0.{10 + i}") for i, r in enumerate(regions)])) == 3
 
 
 def test_baselines_and_savings():
@@ -125,7 +124,7 @@ def test_baseline_missing_provider_is_null_and_reliability_note():
 
 
 def test_explanations_are_specific_and_traceable():
-    res = recommend(wl(), [rec(instance="cheap", price="0.10"), rec(instance="dear", price="0.20")])
+    res = recommend(wl(), [rec(provider="AWS", instance="cheap", price="0.10"), rec(provider="GCP", instance="dear", price="0.20")])
     e = res["recommendations"][0]["explanation"]
     text = " ".join([e["summary"]] + e["reasons"])
     for needle in ("cheap", "vCPU", "RAM", "fit", "On-Demand", "Interruption risk", "$"):
@@ -135,7 +134,7 @@ def test_explanations_are_specific_and_traceable():
 
 
 def test_effectively_tied_is_reported():
-    res = recommend(wl(), [rec(instance="a", price="0.1000"), rec(instance="b", price="0.1001")])
+    res = recommend(wl(), [rec(provider="AWS", instance="a", price="0.1000"), rec(provider="GCP", instance="b", price="0.1001")])
     assert "effectively tied" in res["recommendations"][0]["explanation"]["summary"]
 
 

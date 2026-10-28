@@ -4,16 +4,17 @@ export interface FormState {
   vcpu: string; ram_gb: string; storage_gb: string; storage_type: "SSD" | "HDD";
   monthly_data_transfer_in_gb: string; monthly_data_transfer_out_gb: string;
   usage_pattern: UsagePattern; expected_runtime_hours_per_month: string; interruption_tolerant: boolean;
-  gpu_required: boolean; gpu_type: string; preferred_region: string;
+  gpu_required: boolean; gpu_type: string; gpu_count: string; preferred_region: string;
 }
 export type FormErrors = Partial<Record<keyof FormState, string>>;
 
-export const MAX_RUNTIME = 744;
+/** Requirement Table 4.1: runtime is at most 730 hours (one average month). */
+export const MAX_RUNTIME = 730;
 
 export const EMPTY_FORM: FormState = {
   vcpu: "", ram_gb: "", storage_gb: "", storage_type: "SSD", monthly_data_transfer_in_gb: "",
   monthly_data_transfer_out_gb: "", usage_pattern: "steady-state", expected_runtime_hours_per_month: "720",
-  interruption_tolerant: false, gpu_required: false, gpu_type: "", preferred_region: "any",
+  interruption_tolerant: false, gpu_required: false, gpu_type: "", gpu_count: "1", preferred_region: "any",
 };
 
 /** Realistic demo workload (spec §51). */
@@ -27,7 +28,7 @@ export type StepId = 1 | 2 | 3 | 4 | 5;
 export const STEP_FIELDS: Record<1 | 2 | 3, (keyof FormState)[]> = {
   1: ["vcpu", "ram_gb"],
   2: ["storage_gb", "storage_type", "monthly_data_transfer_in_gb", "monthly_data_transfer_out_gb"],
-  3: ["usage_pattern", "expected_runtime_hours_per_month", "interruption_tolerant", "gpu_required", "gpu_type", "preferred_region"],
+  3: ["usage_pattern", "expected_runtime_hours_per_month", "interruption_tolerant", "gpu_required", "gpu_type", "gpu_count", "preferred_region"],
 };
 
 const num = (s: string) => (s.trim() === "" ? NaN : Number(s));
@@ -45,6 +46,7 @@ export function validateForm(f: FormState): FormErrors {
     else if (v < 0) e[k] = `${label} must be 0 or more`;
   };
   pos("vcpu", "vCPU"); pos("ram_gb", "RAM");
+  if (!e.vcpu && !Number.isInteger(num(f.vcpu))) e.vcpu = "vCPU must be a whole number";
   nonNeg("storage_gb", "Storage"); nonNeg("monthly_data_transfer_in_gb", "Inbound transfer");
   nonNeg("monthly_data_transfer_out_gb", "Outbound transfer");
   const rt = num(f.expected_runtime_hours_per_month);
@@ -52,6 +54,11 @@ export function validateForm(f: FormState): FormErrors {
   else if (rt <= 0) e.expected_runtime_hours_per_month = "Runtime must be greater than 0";
   else if (rt > MAX_RUNTIME) e.expected_runtime_hours_per_month = `Runtime must be at most ${MAX_RUNTIME} hours`;
   if (f.gpu_required && !f.gpu_type) e.gpu_type = "Choose a GPU type";
+  if (f.gpu_required) {
+    const g = num(f.gpu_count);
+    if (Number.isNaN(g)) e.gpu_count = "GPU count is required";
+    else if (!Number.isInteger(g) || g < 1) e.gpu_count = "GPU count must be a whole number, at least 1";
+  }
   if (f.usage_pattern === "gpu-intensive" && !f.gpu_required) e.gpu_required = "A GPU-intensive workload requires a GPU";
   if (!f.preferred_region.trim()) e.preferred_region = "Choose a region, or 'Any supported region'";
   return e;
@@ -70,6 +77,7 @@ export function toWorkload(f: FormState): WorkloadProfile {
     monthly_data_transfer_in_gb: Number(f.monthly_data_transfer_in_gb),
     monthly_data_transfer_out_gb: Number(f.monthly_data_transfer_out_gb),
     usage_pattern: f.usage_pattern, gpu_required: f.gpu_required, gpu_type: f.gpu_required ? f.gpu_type : null,
+    gpu_count: f.gpu_required ? Number(f.gpu_count) : 0,
     expected_runtime_hours_per_month: Number(f.expected_runtime_hours_per_month),
     interruption_tolerant: f.interruption_tolerant, preferred_region: f.preferred_region.trim(),
   };
@@ -82,6 +90,7 @@ export function toForm(w: WorkloadProfile): FormState {
     monthly_data_transfer_out_gb: String(w.monthly_data_transfer_out_gb),
     usage_pattern: w.usage_pattern, expected_runtime_hours_per_month: String(w.expected_runtime_hours_per_month),
     interruption_tolerant: w.interruption_tolerant, gpu_required: w.gpu_required, gpu_type: w.gpu_type ?? "",
+    gpu_count: String(w.gpu_count ?? (w.gpu_required ? 1 : 1)),
     preferred_region: w.preferred_region,
   };
 }

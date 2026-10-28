@@ -18,5 +18,20 @@ export function useRecommendation() {
     }
   }, []);
   const reset = useCallback(() => setState({ loading: false, result: null, error: null }), []);
-  return { ...state, run, reset };
+  const [refining, setRefining] = useState(false);
+  /** What-if recompute (Requirement FR-UI-02): the previous result stays visible until the new one arrives. */
+  const refine = useCallback(async (w: WorkloadProfile) => {
+    setRefining(true);
+    try {
+      const result = await analyzeWorkload(w);
+      setState({ loading: false, result, error: null });
+    } catch (e) {
+      // keep the previous result; surface nothing here (the panel shows its own message via the thrown error)
+      if (!(e instanceof ApiError)) return;
+      throw e;
+    } finally {
+      setRefining(false);
+    }
+  }, []);
+  return { ...state, run, reset, refine, refining };
 }

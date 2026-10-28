@@ -56,7 +56,7 @@ describe("landing / overview", () => {
 
   it("app shell exposes all five destinations and the snapshot date; never claims AI", async () => {
     await renderApp();
-    const nav = screen.getByRole("navigation", { name: "Primary" });
+    const nav = screen.getByRole("navigation", { name: "Sections" });
     for (const t of ["Overview", "New Analysis", "My Analyses", "Pricing Data", "Methodology"]) expect(within(nav).getByRole("link", { name: t })).toBeInTheDocument();
     expect(await screen.findByText("Oct 19, 2026")).toBeInTheDocument();
     expect(screen.getByText("Prototype")).toBeInTheDocument();

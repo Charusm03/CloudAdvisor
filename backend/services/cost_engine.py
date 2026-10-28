@@ -5,7 +5,7 @@ compute  on_demand: price * runtime
          reserved:  price * max(runtime, hours_per_month)   (committed capacity is billed all month)
 storage  storage_gb * storage_price_per_gb_month
 egress   out_gb * egress_price_per_gb
-ingress  in_gb  * ingress_price_per_gb
+ingress  in_gb  * ingress_price_per_gb   (only when CostConfig.include_ingress; otherwise 0 - Requirement section 8)
 """
 from dataclasses import dataclass
 from decimal import ROUND_HALF_UP, Decimal
@@ -46,5 +46,5 @@ def compute_cost(w, rec, cfg=DEFAULT_COST_CONFIG):
         compute=rec.price_per_hour * hours,
         storage=w.storage_gb * rec.storage_price_per_gb_month,
         egress=w.monthly_data_transfer_out_gb * rec.egress_price_per_gb,
-        ingress=w.monthly_data_transfer_in_gb * rec.ingress_price_per_gb,
+        ingress=(w.monthly_data_transfer_in_gb * rec.ingress_price_per_gb) if cfg.include_ingress else Decimal(0),
         billed_hours=hours)

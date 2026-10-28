@@ -51,7 +51,7 @@ def test_w16_region_any_default_and_max_runtime():
     out = validate_workload({**{"vcpu": 1, "ram_gb": 1, "storage_gb": 0, "storage_type": "HDD",
                                 "monthly_data_transfer_in_gb": 0, "monthly_data_transfer_out_gb": 0,
                                 "usage_pattern": "bursty", "gpu_required": False,
-                                "interruption_tolerant": True, "expected_runtime_hours_per_month": 744}})
+                                "interruption_tolerant": True, "expected_runtime_hours_per_month": 730}})
     assert out["preferred_region"] == "any" and out["gpu_type"] is None
 
 

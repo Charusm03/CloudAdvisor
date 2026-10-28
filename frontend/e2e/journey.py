@@ -35,9 +35,9 @@ with sync_playwright() as p:
     d.value.save_as("/tmp/shots/out.pdf"); print("pdf:", d.value.suggested_filename)
     # save + my analyses
     pg.get_by_role("button",name="Save analysis").click(); pg.get_by_role("button",name="Save",exact=True).click()
-    pg.get_by_role("navigation",name="Primary").get_by_role("link",name="My Analyses").click()
+    pg.get_by_role("navigation",name="Sections").get_by_role("link",name="My Analyses").click()
     pg.wait_for_selector("table"); pg.screenshot(path="/tmp/shots/09-myanalyses.png")
-    pg.get_by_role("navigation",name="Primary").get_by_role("link",name="Pricing Data").click()
+    pg.get_by_role("navigation",name="Sections").get_by_role("link",name="Pricing Data").click()
     pg.wait_for_selector("table"); pg.screenshot(path="/tmp/shots/10-pricing.png")
     print("pricing rows shown:", pg.locator("table tbody tr").count())
     for w in (1024,768,390):

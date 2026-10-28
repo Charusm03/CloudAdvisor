@@ -1,20 +1,27 @@
-import { Globe2 } from "lucide-react";
+import { Globe2, MapPin } from "lucide-react";
 import { usePricing } from "../../context/AppContext";
 import { ChoiceCard } from "./Choice";
 import type { FormErrors, FormState } from "../../services/validation";
 import type { ProviderName } from "../../types";
 
 const PROV_NAME: Record<ProviderName, string> = { AWS: "AWS", Azure: "Azure", GCP: "Google Cloud" };
+const PROVIDERS: ProviderName[] = ["AWS", "Azure", "GCP"];
 
 export function RegionStep({ form, errors, set }: { form: FormState; errors: FormErrors; set: (p: Partial<FormState>) => void }) {
-  const { regionsByProvider, loading, error, retry } = usePricing();
+  const { regionsByProvider, regionGroups, loading, error, retry } = usePricing();
   return (
     <section className="subsection" aria-labelledby="region-title">
       <h3 id="region-title">Where should it run?</h3>
       <div className="choices">
         <ChoiceCard name="region" value="any" checked={form.preferred_region === "any"} onChange={() => set({ preferred_region: "any" })}
           icon={<Globe2 size={20} />} title="Any supported region" text="Compare every region in the pricing data." />
+        {Object.entries(regionGroups).map(([key, g]) => (
+          <ChoiceCard key={key} name="region" value={key} checked={form.preferred_region === key} onChange={() => set({ preferred_region: key })}
+            icon={<MapPin size={20} />} title={g.label}
+            text={`Compares all three providers: ${PROVIDERS.map((p) => g.regions[p]?.[0]).filter(Boolean).join(", ")}.`} />
+        ))}
       </div>
+      <p className="help">Or pick one specific provider region:</p>
       {loading && <p className="help">Loading supported regions…</p>}
       {error && <p className="help">Couldn't load the region list. <button type="button" className="link" onClick={retry}>Try again</button></p>}
       <div className="region-groups">

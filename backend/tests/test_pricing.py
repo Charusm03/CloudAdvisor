@@ -22,12 +22,26 @@ def test_spot_and_reserved_cheaper_than_on_demand_for_same_instance():
             assert r.price_per_hour < od[(r.provider, r.region, r.instance_type)]
 
 
-def test_bad_csv_rejected(tmp_path):
+def _bad_csv(tmp_path):
     p = tmp_path / "bad.csv"
     src = (ROOT / "data" / "pricing.csv").read_text().splitlines()
-    p.write_text("\n".join(src[:2]).replace(",on_demand,", ",lease,") + "\n")
-    with pytest.raises(ValueError):
-        StaticPricingProvider(str(p)).get_prices()
+    bad = src[1].replace(",on_demand,", ",lease,")
+    nan = src[2].replace(",0.01331,", ",not-a-number,")
+    p.write_text("\n".join([src[0], bad, nan, src[3]]) + "\n")
+    return p
+
+
+def test_bad_csv_rows_skipped_and_logged(tmp_path, caplog):
+    prov = StaticPricingProvider(str(_bad_csv(tmp_path)))
+    with caplog.at_level("WARNING"):
+        rows = prov.get_prices()
+    assert len(rows) == 1 and [line for line, _ in prov.skipped] == [2, 3]
+    assert "skipped" in caplog.text
+
+
+def test_bad_csv_strict_mode_raises(tmp_path):
+    with pytest.raises(ValueError, match="line 2"):
+        StaticPricingProvider(str(_bad_csv(tmp_path)), strict=True).get_prices()
 
 
 def test_seeded_db_and_pricing_api(client):

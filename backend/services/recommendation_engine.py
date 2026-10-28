@@ -1,14 +1,14 @@
-"""Ranking pipeline: compatibility -> interruption constraint -> cost -> fit -> pricing-model suitability.
+"""Ranking pipeline: compatibility -> pricing-model eligibility -> smallest fit -> total monthly cost.
 
-Sort key: (spot_not_primary, -score, total, provider, region, instance, model)
-  * spot_not_primary: spot candidates for non-interruption-tolerant workloads sort AFTER every other
-    candidate, so they can appear as alternatives but are never the primary recommendation.
-  * score: see ScoringConfig (all weights are in backend/config.py).
+Default ranking (RankingConfig.mode == "cost", Requirement FR-REC-01): ascending total monthly cost, ties broken
+deterministically by provider/region/instance/model. The cost/fit/suitability `score` is still computed and
+shown for information; set RANKING_MODE=weighted to order by it instead.
+Spot / reserved candidates that the workload is not eligible for are never generated (see candidate_service).
 """
 from dataclasses import dataclass
 from decimal import Decimal
 
-from backend.config import DEFAULT_COST_CONFIG, DEFAULT_SCORING_CONFIG
+from backend.config import DEFAULT_COST_CONFIG, DEFAULT_RANKING_CONFIG, DEFAULT_SCORING_CONFIG
 from backend.services.candidate_service import Fit, find_candidates, resource_fit
 from backend.services.cost_engine import CostBreakdown, compute_cost, money
 from backend.services.explanation_service import explain, warnings_for
@@ -48,7 +48,7 @@ def _cost_score(cheapest, total):
     return cheapest / total
 
 
-def rank_candidates(w, cands, cost_cfg=DEFAULT_COST_CONFIG, cfg=DEFAULT_SCORING_CONFIG):
+def rank_candidates(w, cands, cost_cfg=DEFAULT_COST_CONFIG, cfg=DEFAULT_SCORING_CONFIG, rank_cfg=DEFAULT_RANKING_CONFIG):
     costed = [(r, compute_cost(w, r, cost_cfg)) for r in cands]
     cheapest = min(c.total for _, c in costed)
     out = []
@@ -59,10 +59,12 @@ def rank_candidates(w, cands, cost_cfg=DEFAULT_COST_CONFIG, cfg=DEFAULT_SCORING_
         ipen = cfg.interruption_penalty[r.interruption_risk] if r.pricing_model == "spot" else Decimal(0)
         cpen = cfg.bursty_commitment_penalty if (r.pricing_model == "reserved" and w.usage_pattern == "bursty") else Decimal(0)
         score = cfg.w_cost * cs + cfg.w_fit * fit.score + cfg.w_suitability * suit - ipen - cpen
-        blocked = r.pricing_model == "spot" and not w.interruption_tolerant
-        out.append(RankedCandidate(r, c, fit, cs, suit, ipen, cpen, score, blocked))
-    out.sort(key=lambda x: (x.spot_not_primary, -x.score, x.total,
-                            x.rec.provider, x.rec.region, x.rec.instance_type, x.rec.pricing_model))
+        out.append(RankedCandidate(r, c, fit, cs, suit, ipen, cpen, score, False))
+    tie = lambda x: (x.rec.provider, x.rec.region, x.rec.instance_type, x.rec.pricing_model)
+    if rank_cfg.mode == "weighted":
+        out.sort(key=lambda x: (-x.score, x.total) + tie(x))
+    else:
+        out.sort(key=lambda x: (x.total,) + tie(x))
     return out
 
 
@@ -126,11 +128,11 @@ def _savings_block(rc, baselines):
     return block
 
 
-def recommend(w, records, cost_cfg=DEFAULT_COST_CONFIG, cfg=DEFAULT_SCORING_CONFIG, top_n=3):
+def recommend(w, records, cost_cfg=DEFAULT_COST_CONFIG, cfg=DEFAULT_SCORING_CONFIG, top_n=3, rank_cfg=DEFAULT_RANKING_CONFIG):
     cands = find_candidates(w, records)
     if not cands:
         raise NoCompatibleCandidates("No pricing records satisfy the requested GPU/resource requirements.")
-    ranked = rank_candidates(w, cands, cost_cfg, cfg)
+    ranked = rank_candidates(w, cands, cost_cfg, cfg, rank_cfg)
     baselines = compute_baselines(ranked)
 
     recs = []

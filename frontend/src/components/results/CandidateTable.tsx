@@ -51,7 +51,7 @@ export function CandidateTable({ data }: { data: RecommendationResponse }) {
                 return (
                   <tr key={`${c.rank}`} className={c.rank === 1 ? "row-best" : ""}>
                     <td>{c.rank}</td><th scope="row">{c.provider}</th><td>{c.region}</td><td>{c.instance_type}</td>
-                    <td className="num">{c.vcpu}</td><td className="num">{c.ram_gb} GB</td><td>{c.pricing_model_label}{c.spot_not_primary && <span className="note"> (alternative only)</span>}</td>
+                    <td className="num">{c.vcpu}</td><td className="num">{c.ram_gb} GB</td><td>{c.pricing_model_label}</td>
                     <td className="num">{usd(c.compute_cost)}</td><td className="num">{usd(c.storage_cost)}</td><td className="num">{usd(c.egress_cost)}</td>
                     <td className="num strong">{usd(c.total_monthly_cost)}</td>
                     <td className={`num ${sav !== null && sav > 0.05 ? "good" : ""}`}>{sav !== null && sav > 0.05 ? `${sav.toFixed(1)}%` : "n/a"}</td>

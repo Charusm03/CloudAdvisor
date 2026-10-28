@@ -8,6 +8,12 @@ const BEST_FOR: Record<PricingModel, string> = {
   on_demand: "Variable workloads", reserved: "Steady workloads", spot: "Interruptible workloads",
 };
 
+const NOT_OFFERED: Record<PricingModel, string> = {
+  on_demand: "(not available for this workload)",
+  spot: "(not offered: your workload isn't interruption tolerant)",
+  reserved: "(not offered: needs a steady-state workload running at least 500 hours/month)",
+};
+
 export function PricingModelComparison({ data }: { data: RecommendationResponse }) {
   const rows = pricingModelSummary(data);
   return (
@@ -32,7 +38,7 @@ export function PricingModelComparison({ data }: { data: RecommendationResponse 
                   <td className="num">{r.cheapest ? `${usd(r.cheapest.total_monthly_cost)} / mo` : "n/a"}</td>
                   <td>{flex}</td>
                   <td>{r.risks.length ? r.risks.map((x) => riskLabel[x as keyof typeof riskLabel]).join(", ") : "n/a"}</td>
-                  <td>{BEST_FOR[r.model]}{r.blocked && <span className="note"> (alternative only: your workload isn't interruption tolerant)</span>}</td>
+                  <td>{BEST_FOR[r.model]}{r.count === 0 && <span className="note"> {NOT_OFFERED[r.model]}</span>}</td>
                 </tr>
               );
             })}

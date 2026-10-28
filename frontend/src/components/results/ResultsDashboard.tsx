@@ -12,10 +12,11 @@ import { PricingModelComparison } from "./PricingModelComparison";
 import { ResourceFit } from "./ResourceFit";
 import { CostVsFitChart } from "./CostVsFitChart";
 import { AssumptionsPanel } from "./AssumptionsPanel";
+import { WhatIfPanel } from "./WhatIfPanel";
 import { CandidateTable } from "./CandidateTable";
 import { egressInsight } from "../../lib/derive";
 import { exportCsv, exportPdf } from "../../lib/export";
-import type { RecommendationResponse } from "../../types";
+import type { RecommendationResponse, WorkloadProfile } from "../../types";
 
 const SECTIONS = [
   ["decision", "Decision"], ["why", "Why"], ["providers", "Providers"], ["options", "Top options"], ["costs", "Cost drivers"],
@@ -25,9 +26,11 @@ const SECTIONS = [
 export interface DashboardProps {
   data: RecommendationResponse; onNew: () => void; onModify: () => void;
   onSave?: (name: string) => void; saved?: boolean; defaultName?: string;
+  /** When provided, a what-if panel recomputes the recommendation as inputs change. */
+  onRecompute?: (w: WorkloadProfile) => Promise<void>;
 }
 
-export function ResultsDashboard({ data, onNew, onModify, onSave, saved, defaultName }: DashboardProps) {
+export function ResultsDashboard({ data, onNew, onModify, onSave, saved, defaultName, onRecompute }: DashboardProps) {
   const rec = data.best_overall;
   const insight = egressInsight(data);
   const [naming, setNaming] = useState(false);
@@ -64,7 +67,7 @@ export function ResultsDashboard({ data, onNew, onModify, onSave, saved, default
       </div>
 
       <RecommendationHero rec={rec} />
-      <WhyRecommended rec={rec} />
+      <WhyRecommended rec={rec} classification={data.classification} />
       <ProviderComparison data={data} />
       <TopRecommendations recs={data.recommendations} />
       <CostBreakdown cost={rec} />
@@ -79,6 +82,7 @@ export function ResultsDashboard({ data, onNew, onModify, onSave, saved, default
           <CostVsFitChart candidates={data.candidates} best={rec} />
         </div>
       </section>
+      {onRecompute && <WhatIfPanel key={JSON.stringify(data.workload)} workload={data.workload} onRecompute={onRecompute} />}
       <AssumptionsPanel data={data} />
       <CandidateTable data={data} />
     </div>

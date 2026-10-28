@@ -1,4 +1,9 @@
-"""Initialise the pricing table from data/pricing.csv.   python -m backend.database.seed [--reset]"""
+"""Initialise / refresh the pricing table from data/pricing.csv.
+
+    python -m backend.database.seed             seed only when the table is empty
+    python -m backend.database.seed --reset     wipe and reload (also available as --refresh)
+
+Run --refresh after updating the CSV (e.g. from a cron job or the CI workflow) to publish a new snapshot."""
 import sys
 
 from sqlalchemy import delete, func, select
@@ -7,12 +12,12 @@ from backend.models.pricing import PricingRecord
 from backend.services.pricing_service import StaticPricingProvider
 
 
-def seed_pricing(session, csv_path, reset=False):
+def seed_pricing(session, csv_path, reset=False, strict=False):
     if reset:
         session.execute(delete(PricingRecord))
     if session.scalar(select(func.count()).select_from(PricingRecord)) > 0:
         return 0
-    rows = StaticPricingProvider(csv_path).get_prices()
+    rows = StaticPricingProvider(csv_path, strict=strict).get_prices()
     for r in rows:
         session.add(PricingRecord(
             provider=r.provider, region=r.region, instance_type=r.instance_type,
@@ -32,4 +37,4 @@ if __name__ == "__main__":
     from backend.database.db import session_scope
     app = create_app()
     with app.app_context(), session_scope() as s:
-        print("seeded", seed_pricing(s, app.config["PRICING_CSV"], reset="--reset" in sys.argv), "records")
+        print("seeded", seed_pricing(s, app.config["PRICING_CSV"], reset=("--reset" in sys.argv or "--refresh" in sys.argv)), "records")

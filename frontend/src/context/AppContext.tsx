@@ -1,15 +1,21 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
-import { fetchPricing } from "../services/api";
+import { fetchPricing, fetchPricingMeta } from "../services/api";
 import { useRecommendation } from "../hooks/useRecommendation";
 import { deleteAnalysis, loadAnalyses, saveAnalysis } from "../lib/storage";
 import { DEMO_FORM, EMPTY_FORM, type FormState } from "../services/validation";
-import type { PricingRecord, ProviderName, RecommendationResponse, SavedAnalysis, WorkloadProfile } from "../types";
+import type { PricingFreshness, PricingRecord, ProviderName, RecommendationResponse, RegionGroup, SavedAnalysis, WorkloadProfile } from "../types";
 
 /* ---- Pricing data (shared, read-only) ---- */
 interface PricingCtx {
   records: PricingRecord[]; loading: boolean; error: string | null; snapshotDate: string | null;
   regionsByProvider: Record<ProviderName, string[]>; gpuTypes: string[]; retry: () => void;
+  regionGroups: Record<string, RegionGroup>; freshness: PricingFreshness | null;
 }
+/** Used when /api/pricing/meta is unavailable, so the grouped region choices still work. */
+const FALLBACK_GROUPS: Record<string, RegionGroup> = {
+  us: { label: "United States", regions: { AWS: ["us-east-1"], Azure: ["eastus"], GCP: ["us-central1"] } },
+  europe: { label: "Europe", regions: { AWS: ["eu-west-1"], Azure: ["westeurope"], GCP: ["europe-west1"] } },
+};
 const PricingContext = createContext<PricingCtx | null>(null);
 
 export function PricingProvider({ children }: { children: ReactNode }) {
@@ -17,6 +23,14 @@ export function PricingProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [tick, setTick] = useState(0);
+  const [meta, setMeta] = useState<{ groups: Record<string, RegionGroup>; freshness: PricingFreshness | null } | null>(null);
+  useEffect(() => {
+    let live = true;
+    fetchPricingMeta()
+      .then((m) => { if (live && m && !Array.isArray(m) && m.region_groups) setMeta({ groups: m.region_groups, freshness: m.freshness ?? null }); })
+      .catch(() => { /* optional: fall back to defaults */ });
+    return () => { live = false; };
+  }, [tick]);
   useEffect(() => {
     let live = true;
     setLoading(true);
@@ -32,8 +46,11 @@ export function PricingProvider({ children }: { children: ReactNode }) {
     for (const p of Object.keys(regionsByProvider) as ProviderName[]) regionsByProvider[p].sort();
     const gpuTypes = [...new Set(records.map((r) => r.gpu_type).filter((g): g is string => !!g))].sort();
     const snapshotDate = records.length ? [...records.map((r) => r.price_snapshot_date)].sort().slice(-1)[0] : null;
-    return { records, loading, error, snapshotDate, regionsByProvider, gpuTypes, retry: () => setTick((t) => t + 1) };
-  }, [records, loading, error]);
+    return {
+      records, loading, error, snapshotDate, regionsByProvider, gpuTypes, retry: () => setTick((t) => t + 1),
+      regionGroups: meta?.groups ?? FALLBACK_GROUPS, freshness: meta?.freshness ?? null,
+    };
+  }, [records, loading, error, meta]);
   return <PricingContext.Provider value={value}>{children}</PricingContext.Provider>;
 }
 export function usePricing() {
@@ -64,6 +81,8 @@ export function useForm() {
 interface AnalysisCtx {
   loading: boolean; result: RecommendationResponse | null; error: { kind: string; message: string } | null;
   run: (w: WorkloadProfile) => Promise<void>; clear: () => void;
+  /** Recompute in place while keeping the current result on screen (what-if changes). */
+  refine: (w: WorkloadProfile) => Promise<void>; refining: boolean;
   saved: SavedAnalysis[]; save: (name: string) => SavedAnalysis | null; remove: (id: string) => void;
 }
 const AnalysisContext = createContext<AnalysisCtx | null>(null);
@@ -79,7 +98,8 @@ export function AnalysisProvider({ children }: { children: ReactNode }) {
   const remove = useCallback((id: string) => { deleteAnalysis(id); setSaved(loadAnalyses()); }, []);
   const value = useMemo<AnalysisCtx>(() => ({
     loading: rec.loading, result: rec.result, error: rec.error, run: rec.run, clear: rec.reset, saved, save, remove,
-  }), [rec.loading, rec.result, rec.error, rec.run, rec.reset, saved, save, remove]);
+    refine: rec.refine, refining: rec.refining,
+  }), [rec.loading, rec.result, rec.error, rec.run, rec.reset, rec.refine, rec.refining, saved, save, remove]);
   return <AnalysisContext.Provider value={value}>{children}</AnalysisContext.Provider>;
 }
 export function useAnalysis() {

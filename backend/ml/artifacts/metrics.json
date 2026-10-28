@@ -1,0 +1,30 @@
+{
+  "model": "RandomForestClassifier(n_estimators=200, min_samples_leaf=2)",
+  "training_data": "synthetic archetypes (backend/ml/features.py), seed 42",
+  "n_samples": 2000,
+  "classes": [
+    "batch/scheduled",
+    "bursty",
+    "gpu-intensive",
+    "steady-state"
+  ],
+  "cv": "stratified 5-fold",
+  "accuracy_mean": 0.9555,
+  "accuracy_std": 0.009,
+  "f1_macro_mean": 0.9555,
+  "f1_macro_std": 0.009,
+  "feature_importance": {
+    "storage_gb": 0.1622,
+    "runtime_ratio": 0.1612,
+    "gpu_count": 0.1581,
+    "gpu_required": 0.1571,
+    "runtime_hours": 0.148,
+    "ingress_gb": 0.0677,
+    "egress_gb": 0.0622,
+    "vcpu": 0.027,
+    "ram_gb": 0.0251,
+    "interruption_tolerant": 0.0193,
+    "ram_per_vcpu": 0.0121
+  },
+  "note": "Synthetic labels: scores show the model learns the archetypes, not real-world accuracy."
+}

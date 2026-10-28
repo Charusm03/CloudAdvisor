@@ -12,7 +12,7 @@ export function ComputeStep({ form, errors, set }: { form: FormState; errors: Fo
       <div className="split">
         <div className="panel">
           <div className="grid2">
-            <Field id="vcpu" labelText="vCPU" label={<Term k="vcpu" bare />} unit="vCPU"
+            <Field id="vcpu" labelText="vCPU" label={<Term k="vcpu" bare />} unit="vCPU" step="1" help="Whole number of virtual CPUs."
               icon={<Cpu size={18} />} value={form.vcpu} onChange={(v) => set({ vcpu: v })} error={errors.vcpu} />
             <Field id="ram_gb" labelText="RAM" label={<Term k="ram" bare />} unit="GB"
               icon={<MemoryStick size={18} />} value={form.ram_gb} onChange={(v) => set({ ram_gb: v })} error={errors.ram_gb} />

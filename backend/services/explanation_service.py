@@ -3,6 +3,7 @@ Every sentence cites numbers taken from the cost breakdown, fit scores or the co
 from decimal import Decimal
 
 from backend.config import DEFAULT_SCORING_CONFIG
+from backend.services.candidate_service import eligibility_reason
 from backend.services.cost_engine import money
 from backend.utils.constants import MODEL_LABELS
 
@@ -41,8 +42,7 @@ def warnings_for(w, rc):
         out.append(f"Spot/preemptible capacity can be interrupted (risk: {r.interruption_risk}).")
         if r.interruption_risk == "high":
             out.append("High interruption risk - make sure the workload can checkpoint and restart.")
-        if not w.interruption_tolerant:
-            out.append("Shown as an alternative only: this workload is not interruption tolerant.")
+        out.append("Exact spot price changes and capacity availability are not modelled.")
     if r.pricing_model == "reserved":
         out.append(f"Requires a {r.commitment_months}-month commitment and is billed for the whole month.")
         if w.usage_pattern == "bursty":
@@ -110,6 +110,21 @@ def explain(w, rc, rank, ranked, cfg=DEFAULT_SCORING_CONFIG):
     if r.pricing_model == "reserved":
         tradeoffs.append("Reserved pricing would lose its advantage if the workload ran only part of the month.")
 
+    best_total = top.total
+    delta_pct = ((total - best_total) / best_total * 100) if best_total > 0 else Decimal(0)
+    tied = rank > 1 and best_total > 0 and abs(delta_pct) < cfg.tie_threshold_pct
+    if rank == 1 and len(ranked) > 1 and total > 0:
+        tied = abs(ranked[1].total - total) / total * 100 < cfg.tie_threshold_pct
+    parts = {"compute": c.compute, "storage": c.storage, "egress": c.egress, "ingress": c.ingress}
+    driver = max(parts, key=lambda k: parts[k])
+    dominant = {"component": driver, "amount": float(money(parts[driver])),
+                "share_pct": float((parts[driver] / total * 100).quantize(Decimal("0.1"))) if total > 0 else 0.0}
+
     summary = (f"{label(rc)} is {'recommended' if rank == 1 else f'ranked #{rank}'} at {_m(total)}/month. "
                f"{summary_cmp}")
-    return {"summary": summary, "reasons": reasons, "tradeoffs": tradeoffs, "warnings": warnings_for(w, rc)}
+    return {"summary": summary, "reasons": reasons, "tradeoffs": tradeoffs, "warnings": warnings_for(w, rc),
+            # Structured components required by Requirement FR-REC-03 / Fig. 4.3
+            "dominant_driver": dominant,
+            "eligibility_reason": eligibility_reason(w, r.pricing_model),
+            "delta_vs_best_pct": float(delta_pct.quantize(Decimal("0.1"))),
+            "effectively_tied": bool(tied)}

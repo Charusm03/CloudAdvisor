@@ -10,6 +10,8 @@ export interface WorkloadProfile {
   monthly_data_transfer_in_gb: number; monthly_data_transfer_out_gb: number;
   usage_pattern: UsagePattern; gpu_required: boolean; gpu_type: string | null;
   expected_runtime_hours_per_month: number; interruption_tolerant: boolean; preferred_region: string;
+  /** Number of GPUs; optional so analyses saved before it existed still load. */
+  gpu_count?: number;
 }
 /** @deprecated kept so older imports keep compiling */
 export type WorkloadInput = WorkloadProfile;
@@ -26,7 +28,12 @@ export interface CostBreakdown {
   compute_cost: number; storage_cost: number; egress_cost: number; ingress_cost: number; total_monthly_cost: number;
 }
 
-export interface RecommendationExplanation { summary: string; reasons: string[]; tradeoffs: string[]; warnings: string[] }
+export interface DominantDriver { component: "compute" | "storage" | "egress" | "ingress"; amount: number; share_pct: number }
+export interface RecommendationExplanation {
+  summary: string; reasons: string[]; tradeoffs: string[]; warnings: string[];
+  /** Structured components (Requirement FR-REC-03); optional so older saved analyses still render. */
+  dominant_driver?: DominantDriver; eligibility_reason?: string; delta_vs_best_pct?: number; effectively_tied?: boolean;
+}
 export type Explanation = RecommendationExplanation;
 
 export interface SavingsEntry {
@@ -47,11 +54,26 @@ export interface Recommendation extends Candidate {
 
 export interface Baseline { label: string; total_monthly_cost: number }
 
+/** Advisory ML classification; never changes which pricing models are eligible. */
+export interface Classification {
+  predicted_pattern: UsagePattern; confidence: number; probabilities: Record<string, number>;
+  selected_pattern: UsagePattern | null; matches_selected: boolean | null; strategy_prior: string;
+  suggested_defaults: { expected_runtime_hours_per_month: number; interruption_tolerant: boolean };
+  top_features: { feature: string; importance: number }[]; advisory_only: boolean;
+}
+export interface PricingFreshness { snapshot_date: string; age_days: number; status: "fresh" | "stale"; stale_after_days: number }
+export interface RegionGroup { label: string; regions: Record<string, string[]> }
+export interface PricingMeta {
+  records: number; freshness: PricingFreshness | null; sources?: string[]; gpu_types: string[];
+  regions: Record<string, string[]>; region_groups: Record<string, RegionGroup>;
+}
+
 export interface RecommendationResponse {
   workload: WorkloadProfile; recommendations: Recommendation[]; best_overall: Recommendation;
   cheapest_valid: Candidate; provider_comparison: Record<string, Candidate | null>; candidates: Candidate[];
   baselines: Record<BaselineKey, Baseline | null>;
   pricing_snapshot_date: string; assumptions: string[];
+  classification?: Classification | null; pricing_freshness?: PricingFreshness;
 }
 
 export interface ApiErrorBody { error: string; message: string; field?: string }

@@ -1,7 +1,7 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, current_app, jsonify, request
 
 from backend.database.db import session_scope
-from backend.services.pricing_service import query_pricing
+from backend.services.pricing_service import pricing_meta, query_pricing
 from backend.utils.constants import PRICING_MODELS, PROVIDERS
 from backend.utils.validation import ValidationError
 
@@ -26,6 +26,14 @@ def get_pricing():
     if model and model not in PRICING_MODELS:
         raise ValidationError("pricing_model", f"pricing_model must be one of {', '.join(PRICING_MODELS)}")
     with session_scope() as s:
-        rows = query_pricing(s, provider, request.args.get("region"), model, _num("min_vcpu"), _num("min_ram"))
+        rows = query_pricing(s, provider, request.args.get("region"), model, _num("min_vcpu"), _num("min_ram"),
+                             request.args.get("gpu_type") or None, _num("min_gpu"))
         out = [{c.name: getattr(r, c.name) for c in r.__table__.columns} for r in rows]
     return jsonify(out)
+
+
+@bp.get("/meta")
+def get_meta():
+    """Snapshot freshness (date, age in days, fresh/stale), sources, regions, GPU types and region groups."""
+    with session_scope() as s:
+        return jsonify(pricing_meta(s, current_app.config["PRICING_STALE_AFTER_DAYS"]))
